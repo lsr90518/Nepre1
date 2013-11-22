@@ -23,6 +23,12 @@
 		0D4C7767183F0CB50011B9EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D4C7742183F0CB50011B9EF /* Foundation.framework */; };
 		0D4C776F183F0CB50011B9EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C776D183F0CB50011B9EF /* InfoPlist.strings */; };
 		0D4C7772183F0CB50011B9EF /* Nepre2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C7771183F0CB50011B9EF /* Nepre2Tests.m */; };
+		0D4C778D183F0F9E0011B9EF /* SidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C778B183F0F9E0011B9EF /* SidebarViewController.m */; };
+		0D4C778E183F0F9E0011B9EF /* SidebarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C778C183F0F9E0011B9EF /* SidebarViewController.xib */; };
+		0D4C7792183F10A90011B9EF /* FoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C7790183F10A90011B9EF /* FoodViewController.m */; };
+		0D4C7793183F10A90011B9EF /* FoodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C7791183F10A90011B9EF /* FoodViewController.xib */; };
+		0D4C7796183F115A0011B9EF /* RevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C7795183F115A0011B9EF /* RevealController.m */; };
+		0D4C7799183F123F0011B9EF /* ZUUIRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C7798183F123F0011B9EF /* ZUUIRevealController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +64,16 @@
 		0D4C776E183F0CB50011B9EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0D4C7770183F0CB50011B9EF /* Nepre2Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nepre2Tests.h; sourceTree = "<group>"; };
 		0D4C7771183F0CB50011B9EF /* Nepre2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Nepre2Tests.m; sourceTree = "<group>"; };
+		0D4C778A183F0F9E0011B9EF /* SidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarViewController.h; sourceTree = "<group>"; };
+		0D4C778B183F0F9E0011B9EF /* SidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarViewController.m; sourceTree = "<group>"; };
+		0D4C778C183F0F9E0011B9EF /* SidebarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SidebarViewController.xib; sourceTree = "<group>"; };
+		0D4C778F183F10A90011B9EF /* FoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodViewController.h; sourceTree = "<group>"; };
+		0D4C7790183F10A90011B9EF /* FoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodViewController.m; sourceTree = "<group>"; };
+		0D4C7791183F10A90011B9EF /* FoodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoodViewController.xib; sourceTree = "<group>"; };
+		0D4C7794183F115A0011B9EF /* RevealController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevealController.h; sourceTree = "<group>"; };
+		0D4C7795183F115A0011B9EF /* RevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevealController.m; sourceTree = "<group>"; };
+		0D4C7797183F123F0011B9EF /* ZUUIRevealController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUUIRevealController.h; sourceTree = "<group>"; };
+		0D4C7798183F123F0011B9EF /* ZUUIRevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUUIRevealController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +133,7 @@
 		0D4C7746183F0CB50011B9EF /* Nepre2 */ = {
 			isa = PBXGroup;
 			children = (
+				0D4C777E183F0E3F0011B9EF /* View */,
 				0D4C774F183F0CB50011B9EF /* AppDelegate.h */,
 				0D4C7750183F0CB50011B9EF /* AppDelegate.m */,
 				0D4C7758183F0CB50011B9EF /* ViewController.h */,
@@ -158,6 +175,87 @@
 				0D4C776D183F0CB50011B9EF /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0D4C777E183F0E3F0011B9EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0D4C7789183F0F670011B9EF /* Profile */,
+				0D4C7788183F0F620011B9EF /* Like */,
+				0D4C7787183F0F580011B9EF /* Friend */,
+				0D4C7786183F0F4D0011B9EF /* Timeline */,
+				0D4C7785183F0F420011B9EF /* Spot */,
+				0D4C7784183F0F3A0011B9EF /* Food */,
+				0D4C7783183F0EF60011B9EF /* SideBar */,
+				0D4C777F183F0E4A0011B9EF /* ZUUIRevealController */,
+				0D4C7794183F115A0011B9EF /* RevealController.h */,
+				0D4C7795183F115A0011B9EF /* RevealController.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		0D4C777F183F0E4A0011B9EF /* ZUUIRevealController */ = {
+			isa = PBXGroup;
+			children = (
+				0D4C7797183F123F0011B9EF /* ZUUIRevealController.h */,
+				0D4C7798183F123F0011B9EF /* ZUUIRevealController.m */,
+			);
+			name = ZUUIRevealController;
+			sourceTree = "<group>";
+		};
+		0D4C7783183F0EF60011B9EF /* SideBar */ = {
+			isa = PBXGroup;
+			children = (
+				0D4C778A183F0F9E0011B9EF /* SidebarViewController.h */,
+				0D4C778B183F0F9E0011B9EF /* SidebarViewController.m */,
+				0D4C778C183F0F9E0011B9EF /* SidebarViewController.xib */,
+			);
+			name = SideBar;
+			sourceTree = "<group>";
+		};
+		0D4C7784183F0F3A0011B9EF /* Food */ = {
+			isa = PBXGroup;
+			children = (
+				0D4C778F183F10A90011B9EF /* FoodViewController.h */,
+				0D4C7790183F10A90011B9EF /* FoodViewController.m */,
+				0D4C7791183F10A90011B9EF /* FoodViewController.xib */,
+			);
+			name = Food;
+			sourceTree = "<group>";
+		};
+		0D4C7785183F0F420011B9EF /* Spot */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Spot;
+			sourceTree = "<group>";
+		};
+		0D4C7786183F0F4D0011B9EF /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Timeline;
+			sourceTree = "<group>";
+		};
+		0D4C7787183F0F580011B9EF /* Friend */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Friend;
+			sourceTree = "<group>";
+		};
+		0D4C7788183F0F620011B9EF /* Like */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Like;
+			sourceTree = "<group>";
+		};
+		0D4C7789183F0F670011B9EF /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +334,8 @@
 				0D4C7755183F0CB50011B9EF /* Default@2x.png in Resources */,
 				0D4C7757183F0CB50011B9EF /* Default-568h@2x.png in Resources */,
 				0D4C775D183F0CB50011B9EF /* ViewController.xib in Resources */,
+				0D4C778E183F0F9E0011B9EF /* SidebarViewController.xib in Resources */,
+				0D4C7793183F10A90011B9EF /* FoodViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +373,10 @@
 				0D4C774D183F0CB50011B9EF /* main.m in Sources */,
 				0D4C7751183F0CB50011B9EF /* AppDelegate.m in Sources */,
 				0D4C775A183F0CB50011B9EF /* ViewController.m in Sources */,
+				0D4C778D183F0F9E0011B9EF /* SidebarViewController.m in Sources */,
+				0D4C7792183F10A90011B9EF /* FoodViewController.m in Sources */,
+				0D4C7796183F115A0011B9EF /* RevealController.m in Sources */,
+				0D4C7799183F123F0011B9EF /* ZUUIRevealController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

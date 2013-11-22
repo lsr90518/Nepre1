@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-
+#import "FoodViewController.h"
+#import "SidebarViewController.h"
 #import "ViewController.h"
 
 @implementation AppDelegate
@@ -15,10 +16,19 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    
+    FoodViewController *foodViewController = [[FoodViewController alloc]init];
+    SidebarViewController *sidebarViewController = [[SidebarViewController alloc]init];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:foodViewController];
+	
+	RevealController *revealController = [[RevealController alloc] initWithFrontViewController:navigationController rearViewController:sidebarViewController];
+	self.viewController = revealController;
+    
+    
     self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
+	[self.window makeKeyAndVisible];
+    
     return YES;
 }
 
