@@ -1,0 +1,468 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0D4C7741183F0CB50011B9EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D4C7740183F0CB50011B9EF /* UIKit.framework */; };
+		0D4C7743183F0CB50011B9EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D4C7742183F0CB50011B9EF /* Foundation.framework */; };
+		0D4C7745183F0CB50011B9EF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D4C7744183F0CB50011B9EF /* CoreGraphics.framework */; };
+		0D4C774B183F0CB50011B9EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C7749183F0CB50011B9EF /* InfoPlist.strings */; };
+		0D4C774D183F0CB50011B9EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C774C183F0CB50011B9EF /* main.m */; };
+		0D4C7751183F0CB50011B9EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C7750183F0CB50011B9EF /* AppDelegate.m */; };
+		0D4C7753183F0CB50011B9EF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C7752183F0CB50011B9EF /* Default.png */; };
+		0D4C7755183F0CB50011B9EF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C7754183F0CB50011B9EF /* Default@2x.png */; };
+		0D4C7757183F0CB50011B9EF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C7756183F0CB50011B9EF /* Default-568h@2x.png */; };
+		0D4C775A183F0CB50011B9EF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C7759183F0CB50011B9EF /* ViewController.m */; };
+		0D4C775D183F0CB50011B9EF /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C775B183F0CB50011B9EF /* ViewController.xib */; };
+		0D4C7765183F0CB50011B9EF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D4C7764183F0CB50011B9EF /* SenTestingKit.framework */; };
+		0D4C7766183F0CB50011B9EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D4C7740183F0CB50011B9EF /* UIKit.framework */; };
+		0D4C7767183F0CB50011B9EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D4C7742183F0CB50011B9EF /* Foundation.framework */; };
+		0D4C776F183F0CB50011B9EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C776D183F0CB50011B9EF /* InfoPlist.strings */; };
+		0D4C7772183F0CB50011B9EF /* Nepre2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C7771183F0CB50011B9EF /* Nepre2Tests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0D4C7768183F0CB50011B9EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D4C7735183F0CB50011B9EF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D4C773C183F0CB50011B9EF;
+			remoteInfo = Nepre2;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0D4C773D183F0CB50011B9EF /* Nepre2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nepre2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D4C7740183F0CB50011B9EF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0D4C7742183F0CB50011B9EF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0D4C7744183F0CB50011B9EF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0D4C7748183F0CB50011B9EF /* Nepre2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Nepre2-Info.plist"; sourceTree = "<group>"; };
+		0D4C774A183F0CB50011B9EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0D4C774C183F0CB50011B9EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0D4C774E183F0CB50011B9EF /* Nepre2-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Nepre2-Prefix.pch"; sourceTree = "<group>"; };
+		0D4C774F183F0CB50011B9EF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0D4C7750183F0CB50011B9EF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0D4C7752183F0CB50011B9EF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		0D4C7754183F0CB50011B9EF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		0D4C7756183F0CB50011B9EF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		0D4C7758183F0CB50011B9EF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0D4C7759183F0CB50011B9EF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0D4C775C183F0CB50011B9EF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		0D4C7763183F0CB50011B9EF /* Nepre2Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Nepre2Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D4C7764183F0CB50011B9EF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		0D4C776C183F0CB50011B9EF /* Nepre2Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Nepre2Tests-Info.plist"; sourceTree = "<group>"; };
+		0D4C776E183F0CB50011B9EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0D4C7770183F0CB50011B9EF /* Nepre2Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nepre2Tests.h; sourceTree = "<group>"; };
+		0D4C7771183F0CB50011B9EF /* Nepre2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Nepre2Tests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0D4C773A183F0CB50011B9EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D4C7741183F0CB50011B9EF /* UIKit.framework in Frameworks */,
+				0D4C7743183F0CB50011B9EF /* Foundation.framework in Frameworks */,
+				0D4C7745183F0CB50011B9EF /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D4C775F183F0CB50011B9EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D4C7765183F0CB50011B9EF /* SenTestingKit.framework in Frameworks */,
+				0D4C7766183F0CB50011B9EF /* UIKit.framework in Frameworks */,
+				0D4C7767183F0CB50011B9EF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0D4C7734183F0CB50011B9EF = {
+			isa = PBXGroup;
+			children = (
+				0D4C7746183F0CB50011B9EF /* Nepre2 */,
+				0D4C776A183F0CB50011B9EF /* Nepre2Tests */,
+				0D4C773F183F0CB50011B9EF /* Frameworks */,
+				0D4C773E183F0CB50011B9EF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0D4C773E183F0CB50011B9EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0D4C773D183F0CB50011B9EF /* Nepre2.app */,
+				0D4C7763183F0CB50011B9EF /* Nepre2Tests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0D4C773F183F0CB50011B9EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0D4C7740183F0CB50011B9EF /* UIKit.framework */,
+				0D4C7742183F0CB50011B9EF /* Foundation.framework */,
+				0D4C7744183F0CB50011B9EF /* CoreGraphics.framework */,
+				0D4C7764183F0CB50011B9EF /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0D4C7746183F0CB50011B9EF /* Nepre2 */ = {
+			isa = PBXGroup;
+			children = (
+				0D4C774F183F0CB50011B9EF /* AppDelegate.h */,
+				0D4C7750183F0CB50011B9EF /* AppDelegate.m */,
+				0D4C7758183F0CB50011B9EF /* ViewController.h */,
+				0D4C7759183F0CB50011B9EF /* ViewController.m */,
+				0D4C775B183F0CB50011B9EF /* ViewController.xib */,
+				0D4C7747183F0CB50011B9EF /* Supporting Files */,
+			);
+			path = Nepre2;
+			sourceTree = "<group>";
+		};
+		0D4C7747183F0CB50011B9EF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0D4C7748183F0CB50011B9EF /* Nepre2-Info.plist */,
+				0D4C7749183F0CB50011B9EF /* InfoPlist.strings */,
+				0D4C774C183F0CB50011B9EF /* main.m */,
+				0D4C774E183F0CB50011B9EF /* Nepre2-Prefix.pch */,
+				0D4C7752183F0CB50011B9EF /* Default.png */,
+				0D4C7754183F0CB50011B9EF /* Default@2x.png */,
+				0D4C7756183F0CB50011B9EF /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0D4C776A183F0CB50011B9EF /* Nepre2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0D4C7770183F0CB50011B9EF /* Nepre2Tests.h */,
+				0D4C7771183F0CB50011B9EF /* Nepre2Tests.m */,
+				0D4C776B183F0CB50011B9EF /* Supporting Files */,
+			);
+			path = Nepre2Tests;
+			sourceTree = "<group>";
+		};
+		0D4C776B183F0CB50011B9EF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0D4C776C183F0CB50011B9EF /* Nepre2Tests-Info.plist */,
+				0D4C776D183F0CB50011B9EF /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0D4C773C183F0CB50011B9EF /* Nepre2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D4C7775183F0CB50011B9EF /* Build configuration list for PBXNativeTarget "Nepre2" */;
+			buildPhases = (
+				0D4C7739183F0CB50011B9EF /* Sources */,
+				0D4C773A183F0CB50011B9EF /* Frameworks */,
+				0D4C773B183F0CB50011B9EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Nepre2;
+			productName = Nepre2;
+			productReference = 0D4C773D183F0CB50011B9EF /* Nepre2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0D4C7762183F0CB50011B9EF /* Nepre2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D4C7778183F0CB50011B9EF /* Build configuration list for PBXNativeTarget "Nepre2Tests" */;
+			buildPhases = (
+				0D4C775E183F0CB50011B9EF /* Sources */,
+				0D4C775F183F0CB50011B9EF /* Frameworks */,
+				0D4C7760183F0CB50011B9EF /* Resources */,
+				0D4C7761183F0CB50011B9EF /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0D4C7769183F0CB50011B9EF /* PBXTargetDependency */,
+			);
+			name = Nepre2Tests;
+			productName = Nepre2Tests;
+			productReference = 0D4C7763183F0CB50011B9EF /* Nepre2Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0D4C7735183F0CB50011B9EF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Lsr;
+			};
+			buildConfigurationList = 0D4C7738183F0CB50011B9EF /* Build configuration list for PBXProject "Nepre2" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0D4C7734183F0CB50011B9EF;
+			productRefGroup = 0D4C773E183F0CB50011B9EF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0D4C773C183F0CB50011B9EF /* Nepre2 */,
+				0D4C7762183F0CB50011B9EF /* Nepre2Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0D4C773B183F0CB50011B9EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D4C774B183F0CB50011B9EF /* InfoPlist.strings in Resources */,
+				0D4C7753183F0CB50011B9EF /* Default.png in Resources */,
+				0D4C7755183F0CB50011B9EF /* Default@2x.png in Resources */,
+				0D4C7757183F0CB50011B9EF /* Default-568h@2x.png in Resources */,
+				0D4C775D183F0CB50011B9EF /* ViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D4C7760183F0CB50011B9EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D4C776F183F0CB50011B9EF /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0D4C7761183F0CB50011B9EF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0D4C7739183F0CB50011B9EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D4C774D183F0CB50011B9EF /* main.m in Sources */,
+				0D4C7751183F0CB50011B9EF /* AppDelegate.m in Sources */,
+				0D4C775A183F0CB50011B9EF /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D4C775E183F0CB50011B9EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D4C7772183F0CB50011B9EF /* Nepre2Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0D4C7769183F0CB50011B9EF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D4C773C183F0CB50011B9EF /* Nepre2 */;
+			targetProxy = 0D4C7768183F0CB50011B9EF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0D4C7749183F0CB50011B9EF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0D4C774A183F0CB50011B9EF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0D4C775B183F0CB50011B9EF /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0D4C775C183F0CB50011B9EF /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+		0D4C776D183F0CB50011B9EF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0D4C776E183F0CB50011B9EF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0D4C7773183F0CB50011B9EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0D4C7774183F0CB50011B9EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0D4C7776183F0CB50011B9EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Nepre2/Nepre2-Prefix.pch";
+				INFOPLIST_FILE = "Nepre2/Nepre2-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0D4C7777183F0CB50011B9EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Nepre2/Nepre2-Prefix.pch";
+				INFOPLIST_FILE = "Nepre2/Nepre2-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		0D4C7779183F0CB50011B9EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Nepre2.app/Nepre2";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Nepre2/Nepre2-Prefix.pch";
+				INFOPLIST_FILE = "Nepre2Tests/Nepre2Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		0D4C777A183F0CB50011B9EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Nepre2.app/Nepre2";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Nepre2/Nepre2-Prefix.pch";
+				INFOPLIST_FILE = "Nepre2Tests/Nepre2Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0D4C7738183F0CB50011B9EF /* Build configuration list for PBXProject "Nepre2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D4C7773183F0CB50011B9EF /* Debug */,
+				0D4C7774183F0CB50011B9EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0D4C7775183F0CB50011B9EF /* Build configuration list for PBXNativeTarget "Nepre2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D4C7776183F0CB50011B9EF /* Debug */,
+				0D4C7777183F0CB50011B9EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0D4C7778183F0CB50011B9EF /* Build configuration list for PBXNativeTarget "Nepre2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D4C7779183F0CB50011B9EF /* Debug */,
+				0D4C777A183F0CB50011B9EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0D4C7735183F0CB50011B9EF /* Project object */;
+}
