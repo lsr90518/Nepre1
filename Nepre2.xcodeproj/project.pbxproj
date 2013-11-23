@@ -29,6 +29,15 @@
 		0D4C7793183F10A90011B9EF /* FoodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C7791183F10A90011B9EF /* FoodViewController.xib */; };
 		0D4C7796183F115A0011B9EF /* RevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C7795183F115A0011B9EF /* RevealController.m */; };
 		0D4C7799183F123F0011B9EF /* ZUUIRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C7798183F123F0011B9EF /* ZUUIRevealController.m */; };
+		0D4C77E9184035060011B9EF /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C77E4184035060011B9EF /* avatar.png */; };
+		0D4C77EA184035060011B9EF /* friendsPeople.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C77E5184035060011B9EF /* friendsPeople.png */; };
+		0D4C77EB184035060011B9EF /* likeStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C77E6184035060011B9EF /* likeStar.png */; };
+		0D4C77EC184035060011B9EF /* menuLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C77E7184035060011B9EF /* menuLine.png */; };
+		0D4C77ED184035060011B9EF /* wentHouse.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C77E8184035060011B9EF /* wentHouse.png */; };
+		0D4C77EF184039E90011B9EF /* FoodNavibar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C77EE184039E90011B9EF /* FoodNavibar.png */; };
+		0D4C77F4184075AA0011B9EF /* FoodNavibar2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C77F3184075AA0011B9EF /* FoodNavibar2.png */; };
+		0D4C77F8184078100011B9EF /* PlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4C77F6184078100011B9EF /* PlaceViewController.m */; };
+		0D4C77F9184078100011B9EF /* PlaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D4C77F7184078100011B9EF /* PlaceViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +83,16 @@
 		0D4C7795183F115A0011B9EF /* RevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevealController.m; sourceTree = "<group>"; };
 		0D4C7797183F123F0011B9EF /* ZUUIRevealController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUUIRevealController.h; sourceTree = "<group>"; };
 		0D4C7798183F123F0011B9EF /* ZUUIRevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUUIRevealController.m; sourceTree = "<group>"; };
+		0D4C77E4184035060011B9EF /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
+		0D4C77E5184035060011B9EF /* friendsPeople.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friendsPeople.png; sourceTree = "<group>"; };
+		0D4C77E6184035060011B9EF /* likeStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = likeStar.png; sourceTree = "<group>"; };
+		0D4C77E7184035060011B9EF /* menuLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuLine.png; sourceTree = "<group>"; };
+		0D4C77E8184035060011B9EF /* wentHouse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wentHouse.png; sourceTree = "<group>"; };
+		0D4C77EE184039E90011B9EF /* FoodNavibar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FoodNavibar.png; sourceTree = "<group>"; };
+		0D4C77F3184075AA0011B9EF /* FoodNavibar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FoodNavibar2.png; sourceTree = "<group>"; };
+		0D4C77F5184078100011B9EF /* PlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceViewController.h; sourceTree = "<group>"; };
+		0D4C77F6184078100011B9EF /* PlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceViewController.m; sourceTree = "<group>"; };
+		0D4C77F7184078100011B9EF /* PlaceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +166,7 @@
 		0D4C7747183F0CB50011B9EF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0D4C77E3184035060011B9EF /* resource */,
 				0D4C7748183F0CB50011B9EF /* Nepre2-Info.plist */,
 				0D4C7749183F0CB50011B9EF /* InfoPlist.strings */,
 				0D4C774C183F0CB50011B9EF /* main.m */,
@@ -226,6 +246,9 @@
 		0D4C7785183F0F420011B9EF /* Spot */ = {
 			isa = PBXGroup;
 			children = (
+				0D4C77F5184078100011B9EF /* PlaceViewController.h */,
+				0D4C77F6184078100011B9EF /* PlaceViewController.m */,
+				0D4C77F7184078100011B9EF /* PlaceViewController.xib */,
 			);
 			name = Spot;
 			sourceTree = "<group>";
@@ -256,6 +279,20 @@
 			children = (
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		0D4C77E3184035060011B9EF /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				0D4C77F3184075AA0011B9EF /* FoodNavibar2.png */,
+				0D4C77EE184039E90011B9EF /* FoodNavibar.png */,
+				0D4C77E4184035060011B9EF /* avatar.png */,
+				0D4C77E5184035060011B9EF /* friendsPeople.png */,
+				0D4C77E6184035060011B9EF /* likeStar.png */,
+				0D4C77E7184035060011B9EF /* menuLine.png */,
+				0D4C77E8184035060011B9EF /* wentHouse.png */,
+			);
+			path = resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,6 +373,14 @@
 				0D4C775D183F0CB50011B9EF /* ViewController.xib in Resources */,
 				0D4C778E183F0F9E0011B9EF /* SidebarViewController.xib in Resources */,
 				0D4C7793183F10A90011B9EF /* FoodViewController.xib in Resources */,
+				0D4C77E9184035060011B9EF /* avatar.png in Resources */,
+				0D4C77EA184035060011B9EF /* friendsPeople.png in Resources */,
+				0D4C77EB184035060011B9EF /* likeStar.png in Resources */,
+				0D4C77EC184035060011B9EF /* menuLine.png in Resources */,
+				0D4C77ED184035060011B9EF /* wentHouse.png in Resources */,
+				0D4C77EF184039E90011B9EF /* FoodNavibar.png in Resources */,
+				0D4C77F4184075AA0011B9EF /* FoodNavibar2.png in Resources */,
+				0D4C77F9184078100011B9EF /* PlaceViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +422,7 @@
 				0D4C7792183F10A90011B9EF /* FoodViewController.m in Sources */,
 				0D4C7796183F115A0011B9EF /* RevealController.m in Sources */,
 				0D4C7799183F123F0011B9EF /* ZUUIRevealController.m in Sources */,
+				0D4C77F8184078100011B9EF /* PlaceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +603,7 @@
 				0D4C7777183F0CB50011B9EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0D4C7778183F0CB50011B9EF /* Build configuration list for PBXNativeTarget "Nepre2Tests" */ = {
 			isa = XCConfigurationList;
@@ -565,6 +612,7 @@
 				0D4C777A183F0CB50011B9EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

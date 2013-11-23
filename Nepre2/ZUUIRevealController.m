@@ -510,7 +510,6 @@
 {
 	[super viewDidLoad];
     
-	
 	self.frontView = [[UIView alloc] initWithFrame:self.view.bounds];
 	self.rearView = [[UIView alloc] initWithFrame:self.view.bounds];
 	
@@ -543,6 +542,9 @@
 	
     //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     //update status bar appearance
+    
+    
+    
 }
 
 

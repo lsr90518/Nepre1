@@ -24,7 +24,7 @@
 	
 	RevealController *revealController = [[RevealController alloc] initWithFrontViewController:navigationController rearViewController:sidebarViewController];
 	self.viewController = revealController;
-    
+
     
     self.window.rootViewController = self.viewController;
 	[self.window makeKeyAndVisible];

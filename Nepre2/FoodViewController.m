@@ -7,10 +7,12 @@
 //
 
 #import "FoodViewController.h"
+#import "PlaceViewController.h"
 
 @interface FoodViewController ()
 
 @property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
+@property (weak, nonatomic) IBOutlet UIButton *menuButton;
 
 @end
 
@@ -29,7 +31,7 @@
 {
 	[super viewWillAppear:animated];
     
-    self.title =@"foodView";
+//    self.title =@"foodView";
 	
     UIColor *foodColor = [[UIColor alloc]initWithRed:69.0f/255.0f green:3.0f/255.0f blue:7.0f/255.0f alpha:1.0f];
     
@@ -51,21 +53,14 @@
 		{
 			// If not, allocate one and add it.
             
-            UIImage *menuImage = [UIImage imageNamed:@"menuLine"];
+            [self.menuButton addTarget:self.navigationController.parentViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
             
-			UIBarButtonItem *revealButton = [[UIBarButtonItem alloc]
-                                             initWithImage:menuImage style:UIBarButtonItemStyleBordered target:self.navigationController.parentViewController action:@selector(revealToggle:)];
-            
-			
-            self.navigationItem.leftBarButtonItem = revealButton;
 		}
-        
-        
-        self.navigationController.navigationBar.tintColor = foodColor;
 	}
     
+    self.navigationController.navigationBar.hidden = YES;
+    
 }
-
 
 
 //- (IBAction)OpenAccount:(id)sender {
@@ -77,6 +72,10 @@
 	return (toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (IBAction)changeView:(id)sender {
+    PlaceViewController *p = [[PlaceViewController alloc]init];
+    [self.navigationController pushViewController:p animated:YES];
+}
 
 //- (void)pushExample
 //{
