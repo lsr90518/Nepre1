@@ -7,6 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FoodViewController.h"
+#import "PlaceViewController.h"
+#import "TimelineViewController.h"
+#import "ProfileViewController.h"
+#import "RevealController.h"
+
 
 @interface SidebarViewController : UIViewController
 
