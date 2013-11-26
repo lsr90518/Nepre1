@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ZUUIRevealController.h"
 
-@interface FoodViewController : UIViewController
+@interface FoodViewController : UIViewController{
+   
+}
 
 @end

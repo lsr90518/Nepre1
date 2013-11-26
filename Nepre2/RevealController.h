@@ -12,6 +12,6 @@
 @class FoodViewController;
 @class SidebarViewController;
 
-@interface RevealController : ZUUIRevealController <ZUUIRevealControllerDelegate>
+@interface RevealController : ZUUIRevealController <ZUUIRevealControllerDelegate,UIScrollViewDelegate>
 
 @end

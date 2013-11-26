@@ -7,13 +7,17 @@
 //
 
 #import "FoodViewController.h"
+#import "MainScrollView.h"
 #import "PlaceViewController.h"
+#import "FoodDetailViewController.h"
 
 @interface FoodViewController ()
-@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
 
 @property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIButton *imageButton;
 
 @end
 
@@ -28,12 +32,17 @@
     return self;
 }
 
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
     
 //    self.title =@"foodView";
-	
+    
+    
+//    self.scroller.scrollEnabled = YES;
+    
     UIColor *foodColor = [[UIColor alloc]initWithRed:69.0f/255.0f green:3.0f/255.0f blue:7.0f/255.0f alpha:1.0f];
     
     
@@ -60,15 +69,28 @@
 	}
     
     self.navigationController.navigationBar.hidden = YES;
+    [self.scrollView setContentSize:CGSizeMake(320, 1000)];
     
-    self.scroller.contentSize=CGSizeMake(320,960);
     
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    
+    
+}
 
-//- (IBAction)OpenAccount:(id)sender {
-//    [self pushExample];
-//}
+- (IBAction)pushButton:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    NSLog(@"%d",button.tag);
+    
+    FoodDetailViewController *foodDetailViewController = [[FoodDetailViewController alloc]init];
+    [self.navigationController pushViewController:foodDetailViewController animated:YES];
+    
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
@@ -79,12 +101,6 @@
     PlaceViewController *p = [[PlaceViewController alloc]init];
     [self.navigationController pushViewController:p animated:YES];
 }
-
-//- (void)pushExample
-//{
-//	SpotViewController *stubController = [[SpotViewController alloc] init];
-//	[self.navigationController pushViewController:stubController animated:YES];
-//}
 
 
 - (void)didReceiveMemoryWarning

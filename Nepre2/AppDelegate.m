@@ -24,12 +24,28 @@
 	
 	RevealController *revealController = [[RevealController alloc] initWithFrontViewController:navigationController rearViewController:sidebarViewController];
 	self.viewController = revealController;
+    
+
+    [self initDataArray];
 
     
     self.window.rootViewController = self.viewController;
 	[self.window makeKeyAndVisible];
     
     return YES;
+}
+
+-(void) initDataArray{
+    initArray = [[NSMutableArray alloc]init];
+    
+    for(int i = 1;i<21;i++){
+        NSString *spotFileName = [NSString stringWithFormat:@"%d",i];
+        NSString *foodFileName = [NSString stringWithFormat:@"f%d",i];
+        
+//        [initArray addObject:spotFileName];
+//        [initArray addObject:foodFileName];
+        
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

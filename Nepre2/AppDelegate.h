@@ -12,6 +12,9 @@
 @class ViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    NSMutableString *initArray;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

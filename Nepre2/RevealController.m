@@ -21,6 +21,7 @@
 	self = [super initWithFrontViewController:aFrontViewController rearViewController:aBackViewController];
 	
     
+    
 	if (nil != self)
 	{
 		self.delegate = self;
@@ -68,6 +69,10 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"2");
 }
 
 
