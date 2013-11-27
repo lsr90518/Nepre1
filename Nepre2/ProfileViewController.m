@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 #import "FavoriteViewController.h"
+#import "FollowViewController.h"
 
 @interface ProfileViewController ()
 
@@ -63,6 +64,12 @@
     
     FavoriteViewController *f = [[FavoriteViewController alloc]init];
     [self.navigationController pushViewController:f animated:NO];
+}
+- (IBAction)goFollow:(id)sender {
+    
+    FollowViewController *follow = [[FollowViewController alloc]init];
+    
+    [self.navigationController pushViewController:follow animated:NO];
 }
 
 - (void)didReceiveMemoryWarning

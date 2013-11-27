@@ -155,6 +155,11 @@
 		0DAFA60D1844CAB500789BD5 /* went.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DAFA5E31844CAB500789BD5 /* went.png */; };
 		0DAFA6111844D30100789BD5 /* FavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA60F1844D30100789BD5 /* FavoriteViewController.m */; };
 		0DAFA6121844D30100789BD5 /* FavoriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DAFA6101844D30100789BD5 /* FavoriteViewController.xib */; };
+		0DAFA6171844E11300789BD5 /* FollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA6151844E11300789BD5 /* FollowViewController.m */; };
+		0DAFA6181844E11300789BD5 /* FollowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DAFA6161844E11300789BD5 /* FollowViewController.xib */; };
+		0DAFA61C1844E4E000789BD5 /* follow2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DAFA61B1844E4E000789BD5 /* follow2.png */; };
+		0DAFA6201845CF7A00789BD5 /* FollowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFA61F1845CF7A00789BD5 /* FollowCell.m */; };
+		0DAFA6221845CFBC00789BD5 /* FollowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DAFA6211845CFBC00789BD5 /* FollowCell.xib */; };
 		0DDB9A121843837A00F7369C /* FoodDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DDB9A101843837A00F7369C /* FoodDetailViewController.m */; };
 		0DDB9A131843837A00F7369C /* FoodDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DDB9A111843837A00F7369C /* FoodDetailViewController.xib */; };
 /* End PBXBuildFile section */
@@ -333,6 +338,13 @@
 		0DAFA60E1844D30100789BD5 /* FavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteViewController.h; sourceTree = "<group>"; };
 		0DAFA60F1844D30100789BD5 /* FavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteViewController.m; sourceTree = "<group>"; };
 		0DAFA6101844D30100789BD5 /* FavoriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoriteViewController.xib; sourceTree = "<group>"; };
+		0DAFA6141844E11300789BD5 /* FollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowViewController.h; sourceTree = "<group>"; };
+		0DAFA6151844E11300789BD5 /* FollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowViewController.m; sourceTree = "<group>"; };
+		0DAFA6161844E11300789BD5 /* FollowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowViewController.xib; sourceTree = "<group>"; };
+		0DAFA61B1844E4E000789BD5 /* follow2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = follow2.png; sourceTree = "<group>"; };
+		0DAFA61E1845CF7A00789BD5 /* FollowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowCell.h; sourceTree = "<group>"; };
+		0DAFA61F1845CF7A00789BD5 /* FollowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowCell.m; sourceTree = "<group>"; };
+		0DAFA6211845CFBC00789BD5 /* FollowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowCell.xib; sourceTree = "<group>"; };
 		0DDB9A0F1843837A00F7369C /* FoodDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodDetailViewController.h; sourceTree = "<group>"; };
 		0DDB9A101843837A00F7369C /* FoodDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodDetailViewController.m; sourceTree = "<group>"; };
 		0DDB9A111843837A00F7369C /* FoodDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoodDetailViewController.xib; sourceTree = "<group>"; };
@@ -445,6 +457,7 @@
 		0D4C777E183F0E3F0011B9EF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0DAFA6131844E0B900789BD5 /* Follow */,
 				0DDB9A0E1843835A00F7369C /* TimelineDetail */,
 				0DDB9A0D1843834900F7369C /* SpotDetail */,
 				0DDB9A0C1843833000F7369C /* FoodDetail */,
@@ -634,6 +647,7 @@
 			isa = PBXGroup;
 			children = (
 				0DAFA5BA1844CAB500789BD5 /* _icon-01.png */,
+				0DAFA61B1844E4E000789BD5 /* follow2.png */,
 				0DAFA5BB1844CAB500789BD5 /* _icon-02.png */,
 				0DAFA5BC1844CAB500789BD5 /* _icon-03.png */,
 				0DAFA5BD1844CAB500789BD5 /* _icon-04.png */,
@@ -678,6 +692,27 @@
 			);
 			name = icon;
 			path = resource/icon;
+			sourceTree = "<group>";
+		};
+		0DAFA6131844E0B900789BD5 /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				0DAFA61D1845CF5000789BD5 /* Cell */,
+				0DAFA6141844E11300789BD5 /* FollowViewController.h */,
+				0DAFA6151844E11300789BD5 /* FollowViewController.m */,
+				0DAFA6161844E11300789BD5 /* FollowViewController.xib */,
+			);
+			name = Follow;
+			sourceTree = "<group>";
+		};
+		0DAFA61D1845CF5000789BD5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0DAFA61E1845CF7A00789BD5 /* FollowCell.h */,
+				0DAFA61F1845CF7A00789BD5 /* FollowCell.m */,
+				0DAFA6211845CFBC00789BD5 /* FollowCell.xib */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		0DDB9A0C1843833000F7369C /* FoodDetail */ = {
@@ -904,6 +939,9 @@
 				0DAFA60C1844CAB500789BD5 /* myTimeline.png in Resources */,
 				0DAFA60D1844CAB500789BD5 /* went.png in Resources */,
 				0DAFA6121844D30100789BD5 /* FavoriteViewController.xib in Resources */,
+				0DAFA6181844E11300789BD5 /* FollowViewController.xib in Resources */,
+				0DAFA61C1844E4E000789BD5 /* follow2.png in Resources */,
+				0DAFA6221845CFBC00789BD5 /* FollowCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -951,6 +989,8 @@
 				0DDB9A121843837A00F7369C /* FoodDetailViewController.m in Sources */,
 				0DAFA5B71844C32400789BD5 /* ProfileViewController.m in Sources */,
 				0DAFA6111844D30100789BD5 /* FavoriteViewController.m in Sources */,
+				0DAFA6171844E11300789BD5 /* FollowViewController.m in Sources */,
+				0DAFA6201845CF7A00789BD5 /* FollowCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
