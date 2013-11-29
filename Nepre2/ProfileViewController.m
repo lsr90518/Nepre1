@@ -15,6 +15,7 @@
 @property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scroller;
+@property (weak, nonatomic) IBOutlet UIView *slideView;
 
 @end
 
@@ -43,7 +44,7 @@
 			UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self.navigationController.parentViewController action:@selector(revealGesture:)];
 			self.navigationBarPanGestureRecognizer = panGestureRecognizer;
 			
-			[self.navigationController.view addGestureRecognizer:self.navigationBarPanGestureRecognizer];
+			[self.slideView addGestureRecognizer:self.navigationBarPanGestureRecognizer];
 		}
 		
 		// Check if we have a revealButton already.

@@ -13,6 +13,8 @@
 
 @property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
+@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
+@property (weak, nonatomic) IBOutlet UIView *slideView;
 
 @end
 
@@ -41,7 +43,8 @@
 			UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self.navigationController.parentViewController action:@selector(revealGesture:)];
 			self.navigationBarPanGestureRecognizer = panGestureRecognizer;
 			
-			[self.navigationController.view addGestureRecognizer:self.navigationBarPanGestureRecognizer];
+//			[self.navigationController.view addGestureRecognizer:self.navigationBarPanGestureRecognizer];
+            [self.slideView addGestureRecognizer:self.navigationBarPanGestureRecognizer];
 		}
 		
 		// Check if we have a revealButton already.
@@ -56,11 +59,21 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goFood)];
+    
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    
+    [self.view addGestureRecognizer:swipeLeft];
+    
+    [self.scroller setContentSize:CGSizeMake(320, 1000)];
+    
 }
-- (IBAction)changeView:(id)sender {
-    FoodViewController *f = [[FoodViewController alloc]init];
-    [self.navigationController pushViewController:f animated:YES];
+
+-(void) goFood {
+    FoodViewController *fvc = [[FoodViewController alloc]init];
+    [self.navigationController pushViewController:fvc animated:YES];
 }
+
 
 - (void)didReceiveMemoryWarning
 {

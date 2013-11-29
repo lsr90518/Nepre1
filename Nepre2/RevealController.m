@@ -21,7 +21,6 @@
 	self = [super initWithFrontViewController:aFrontViewController rearViewController:aBackViewController];
 	
     
-    
 	if (nil != self)
 	{
 		self.delegate = self;
@@ -29,6 +28,7 @@
 	
 	return self;
 }
+
 
 /*
  * All of the methods below are optional. You can use them to control the behavior of the ZUUIRevealController,

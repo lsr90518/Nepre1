@@ -8,12 +8,15 @@
 
 #import "FavoriteViewController.h"
 #import "ProfileViewController.h"
+#import "FavoriteCell.h"
 
 @interface FavoriteViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *testTable;
 @property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
-@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
+@property (weak, nonatomic) IBOutlet UITableView *favoriteTable;
+@property (weak, nonatomic) IBOutlet UIView *slideView;
+
 
 @end
 
@@ -42,7 +45,7 @@
 			UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self.navigationController.parentViewController action:@selector(revealGesture:)];
 			self.navigationBarPanGestureRecognizer = panGestureRecognizer;
 			
-			[self.navigationController.view addGestureRecognizer:self.navigationBarPanGestureRecognizer];
+			[self.slideView addGestureRecognizer:self.navigationBarPanGestureRecognizer];
 		}
 		
 		// Check if we have a revealButton already.
@@ -57,10 +60,50 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
-    [self.scroller setContentSize:CGSizeMake(320, 1000)];
-
-    [self.testTable setTransform:CGAffineTransformMakeRotation(M_PI/2)];
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 8;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	static NSString *cellname = @"FavoriteCell";
+    FavoriteCell *cell = (FavoriteCell *)[tableView dequeueReusableCellWithIdentifier:cellname];
+    if (cell == nil){
+        cell = [[FavoriteCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellname];
+	}else{
+		cell = [[FavoriteCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellname];
+	}
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    int rowNum = indexPath.row % 2;
+//    if(rowNum == 0){
+//        return 30;
+//    } else {
+//        return 140;
+//    }
+    return 220;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"wwwwwwwwww%d",indexPath.row);
+    
+}
+
+
 - (IBAction)goProfile:(id)sender {
     ProfileViewController *p = [[ProfileViewController alloc]init];
     

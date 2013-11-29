@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ZUUIRevealController.h"
 
-@interface FoodDetailViewController : UIViewController{
+@interface FoodDetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
     
 }
 

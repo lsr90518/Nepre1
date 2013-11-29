@@ -260,6 +260,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{209, 396}, {108, 100}}</string>
 								<reference key="NSSuperview" ref="850831450"/>
+								<reference key="NSNextKeyView" ref="1048487096"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -296,7 +297,7 @@
 							<object class="IBUIButton" id="98715090">
 								<reference key="NSNextResponder" ref="280501572"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{7, -7}, {24, 44}}</string>
+								<string key="NSFrame">{{13, -7}, {24, 44}}</string>
 								<reference key="NSSuperview" ref="280501572"/>
 								<reference key="NSNextKeyView" ref="347479117"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -504,6 +505,14 @@
 						<reference key="IBUIBackgroundColor" ref="867607796"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
+					<object class="IBUIView" id="1048487096">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">276</int>
+						<string key="NSFrame">{{0, 30}, {15, 518}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
@@ -560,6 +569,14 @@
 					<int key="connectionID">49</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">slideView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1048487096"/>
+					</object>
+					<int key="connectionID">73</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">goFollow:</string>
 						<reference key="source" ref="981633161"/>
@@ -603,6 +620,7 @@
 							<reference ref="900693058"/>
 							<reference ref="347479117"/>
 							<reference ref="850831450"/>
+							<reference ref="1048487096"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -747,6 +765,11 @@
 						<reference key="object" ref="47514966"/>
 						<reference key="parent" ref="900693058"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">72</int>
+						<reference key="object" ref="1048487096"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -776,12 +799,13 @@
 				<string key="66.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="67.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="68.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">71</int>
+			<int key="maxID">73</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
