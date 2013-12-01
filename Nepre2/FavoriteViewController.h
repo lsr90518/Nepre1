@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZUUIRevealController.h"
 
-@interface FavoriteViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface FavoriteViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
+    int sideFlag;
+}
 
 @end

@@ -58,6 +58,8 @@
 		}
 	}
     
+//    self.favoriteTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     self.navigationController.navigationBar.hidden = YES;
     
 }
@@ -78,9 +80,8 @@
     FavoriteCell *cell = (FavoriteCell *)[tableView dequeueReusableCellWithIdentifier:cellname];
     if (cell == nil){
         cell = [[FavoriteCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellname];
-	}else{
-		cell = [[FavoriteCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellname];
 	}
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

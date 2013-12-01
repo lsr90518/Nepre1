@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "ZUUIRevealController.h"
 
-@interface FoodDetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
-    
+@interface FoodDetailViewController : UIViewController<UIScrollViewDelegate>{
+    int sideFlag;
+    float cellHeight;
+    int currentScrollerY;
+    int der;
 }
+@property NSArray *items;
 
-@property (retain,nonatomic) NSArray *items;
 
 @end

@@ -260,7 +260,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{209, 396}, {108, 100}}</string>
 								<reference key="NSSuperview" ref="850831450"/>
-								<reference key="NSNextKeyView" ref="1048487096"/>
+								<reference key="NSNextKeyView" ref="117039427"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -505,7 +505,7 @@
 						<reference key="IBUIBackgroundColor" ref="867607796"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIView" id="1048487096">
+					<object class="IBUIView" id="117039427">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">276</int>
 						<string key="NSFrame">{{0, 30}, {15, 518}}</string>
@@ -572,7 +572,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">slideView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="1048487096"/>
+						<reference key="destination" ref="117039427"/>
 					</object>
 					<int key="connectionID">73</int>
 				</object>
@@ -620,7 +620,7 @@
 							<reference ref="900693058"/>
 							<reference ref="347479117"/>
 							<reference ref="850831450"/>
-							<reference ref="1048487096"/>
+							<reference ref="117039427"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -767,7 +767,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">72</int>
-						<reference key="object" ref="1048487096"/>
+						<reference key="object" ref="117039427"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -825,7 +825,7 @@
 			<string key="favorite.png">{104, 27}</string>
 			<string key="folllow.png">{158, 27}</string>
 			<string key="follower.png">{158, 27}</string>
-			<string key="menuLine.png">{25, 25}</string>
+			<string key="menuLine.png">{100, 100}</string>
 			<string key="myTimeline.png">{104, 27}</string>
 			<string key="went.png">{104, 27}</string>
 		</dictionary>

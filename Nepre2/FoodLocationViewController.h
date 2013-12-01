@@ -14,6 +14,7 @@
 @interface FoodLocationViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate>{
     CLLocationManager *locationManager;
     CLLocation *checkinLocation;
+    int sideFlag;
 }
 
 @end

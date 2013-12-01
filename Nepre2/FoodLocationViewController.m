@@ -9,6 +9,7 @@
 #import "FoodLocationViewController.h"
 #import "JPSThumbnailAnnotation.h"
 #import "MKMapView+ZoomLevel.h"
+#import "FoodDetailViewController.h"
 
 @interface FoodLocationViewController ()
 
@@ -36,7 +37,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self.menuButton addTarget:self.navigationController.parentViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationController.navigationBar.hidden = YES;
     
     
@@ -140,6 +140,17 @@
     [self.mapView setCenterCoordinate:centerCoord zoomLevel:15 animated:NO];
 }
 
+- (IBAction)goDetail:(id)sender {
+    FoodDetailViewController *fdvc = [[FoodDetailViewController alloc]init];
+    [UIView beginAnimations:@"Flips" context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+    
+    [self.navigationController pushViewController:fdvc animated:YES];
+    
+    [UIView commitAnimations];
+}
 
 
 

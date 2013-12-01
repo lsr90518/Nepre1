@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FollowViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface FollowViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+    int sideFlag;
+}
 @property (weak, nonatomic) IBOutlet UITableView *followTable;
 @property (weak, nonatomic) IBOutlet UITableView *followerTable;
 

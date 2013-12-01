@@ -8,6 +8,7 @@
 
 #import "TimelineViewController.h"
 #import "FoodViewController.h"
+#import "PlaceViewController.h"
 
 @interface TimelineViewController ()
 
@@ -60,10 +61,12 @@
     self.navigationController.navigationBar.hidden = YES;
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goFood)];
-    
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-    
     [self.view addGestureRecognizer:swipeLeft];
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goSpot)];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.view addGestureRecognizer:swipeRight];
     
     [self.scroller setContentSize:CGSizeMake(320, 1000)];
     
@@ -72,6 +75,18 @@
 -(void) goFood {
     FoodViewController *fvc = [[FoodViewController alloc]init];
     [self.navigationController pushViewController:fvc animated:YES];
+}
+
+-(void) goSpot {
+    PlaceViewController *tvc = [[PlaceViewController alloc]init];
+    CATransition *animation = [CATransition animation];
+    animation.delegate = self;
+    animation.duration = 0.3;
+    animation.timingFunction = UIViewAnimationCurveEaseInOut;
+    animation.type = kCATransitionMoveIn;
+    //    animation.subtype = kCATransitionFromTop;
+    [[self.navigationController.view layer] addAnimation:animation forKey:@"animation"];
+    [self.navigationController pushViewController:tvc animated:NO];
 }
 
 

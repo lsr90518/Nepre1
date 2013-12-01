@@ -22,18 +22,36 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        hortable = [[UITableView alloc]initWithFrame:CGRectMake(90, -50, 140, 320) style:UITableViewStylePlain];
+        hortable = [[UITableView alloc]initWithFrame:CGRectMake(80, -40, 170, 320) style:UITableViewStylePlain];
         hortable.delegate = self;
         hortable.dataSource = self;
         hortable.transform = CGAffineTransformMakeRotation(M_PI / 2 *3);
         hortable.showsHorizontalScrollIndicator = NO;
         hortable.showsVerticalScrollIndicator = NO;
-        UIButton *authorButton = [[UIButton alloc]initWithFrame:CGRectMake(5, 5, 25, 25)];
+        hortable.backgroundColor = [UIColor blackColor];
+		[self addSubview:hortable];
         
+        //input author button
+        UIButton *authorButton = [[UIButton alloc]initWithFrame:CGRectMake(5, 5, 25, 25)];
+        [authorButton setImage:[UIImage imageNamed:@"_icon-02"] forState:UIControlStateNormal];
+        [authorButton addTarget:self action:@selector(goFriend:) forControlEvents:UIControlEventTouchUpInside];
+        [authorButton setTag:1];
         [self addSubview:authorButton];
         
-		[self addSubview:hortable];
-        _dataArray1 = [[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",nil];
+        //input plus button
+        UIButton *plusButton = [[UIButton alloc]initWithFrame:CGRectMake(290, 5, 25, 25)];
+        [plusButton setImage:[UIImage imageNamed:@"icon-22"] forState:UIControlStateNormal];
+        [plusButton addTarget:self action:@selector(plusFriend:) forControlEvents:UIControlEventTouchUpInside];
+        [plusButton setTag:1];
+        [self addSubview:plusButton];
+        
+        //input a black line
+        UIView *blackLine= [[UIView alloc]initWithFrame:CGRectMake(0, 201, 320, 4)];
+        blackLine.backgroundColor = [UIColor blackColor];
+        [self addSubview:blackLine];
+        
+        
+        _dataArray1 = [[NSMutableArray alloc]initWithObjects:@"f1.jpg",@"2.jpg",@"f3.jpg",@"f4.jpg",@"5.jpg",@"6.jpg",@"7.jpg",@"8.jpg",@"f9.jpg",@"f10.jpg",@"11.jpg",nil];
         
     }
     hortable.tag = 1;
@@ -52,11 +70,24 @@
     NSString *CellIdentifier = [NSString stringWithFormat:@"cell%d",indexPath.row];
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil){
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc]init];
         cell.transform = CGAffineTransformMakeRotation(M_PI/2);
-        [[cell textLabel] setText:[_dataArray1 objectAtIndex:indexPath.row]];
-        cell.textLabel.numberOfLines = 0;
-        cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+        
+        //input imageView
+        UIButton *detailButton = [[UIButton alloc]initWithFrame:CGRectMake(5,0, 190, 135)];
+        [detailButton setImage:[UIImage imageNamed:[_dataArray1 objectAtIndex:indexPath.row]] forState:UIControlStateNormal];
+        [detailButton setTag:indexPath.row];
+        [cell addSubview:detailButton];
+        
+        //input heart star
+        UIButton *likeButton = [[UIButton alloc]initWithFrame:CGRectMake(75, 137, 20, 20)];
+        [likeButton setImage:[UIImage imageNamed:@"icon-09"] forState:UIControlStateNormal];
+        [cell addSubview:likeButton];
+        
+        //input star star
+        UIButton *starButton = [[UIButton alloc]initWithFrame:CGRectMake(100, 137, 20, 20)];
+        [starButton setImage:[UIImage imageNamed:@"icon-16"] forState:UIControlStateNormal];
+        [cell addSubview:starButton];
 		
 	}
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -80,6 +111,23 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor blackColor];
+}
+
+
+-(void) goFriend :(id)sender{
+    
+    UIButton *button = (UIButton*)sender;
+    NSLog(@"%d",button.tag);
+}
+
+-(void) plusFriend: (id)sender{
+    UIButton *button = (UIButton *)sender;
+    NSLog(@"plus friend %d",button.tag);
 }
 
 @end

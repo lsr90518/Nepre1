@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZUUIRevealController.h"
 
-@interface FoodDetailCell : UITableViewCell
+@interface FoodDetailCell : UITableViewCell{
+    int sideFlag;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *detailImageView;
 @property (weak, nonatomic) IBOutlet UIButton *mapButton;
 @property (weak, nonatomic) IBOutlet UIImageView *wentPerson1;

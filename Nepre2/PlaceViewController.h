@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PlaceViewController : UIViewController
+@interface PlaceViewController : UIViewController{
+    int sideFlag;
+}
 
 @end

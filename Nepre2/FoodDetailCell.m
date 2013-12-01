@@ -15,8 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        UITapGestureRecognizer *doubleClick = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-        [self.detailImageView addGestureRecognizer:doubleClick];
+        
     }
     return self;
 }
@@ -29,7 +28,7 @@
 }
 
 - (IBAction)chooseLike:(id)sender  {
-    NSLog(@"double click");
+    NSLog(@"double click!!!");
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView animateWithDuration:0.5 animations:^{
         [self.likeImageView setFrame:CGRectMake(140, 180, 100, 100)];
@@ -49,5 +48,8 @@
     NSLog(@"push me");
 }
 
+- (IBAction)checkSide:(id)sender {
+    
+}
 
 @end

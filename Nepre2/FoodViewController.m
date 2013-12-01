@@ -85,14 +85,15 @@
     
     
     UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(openCamera)];
-    
     [swipeUp setDirection:UISwipeGestureRecognizerDirectionUp];
-    
-    [self.view addGestureRecognizer:swipeUp];
+    [self.cameraView addGestureRecognizer:swipeUp];
     
     
     self.navigationController.navigationBar.hidden = YES;
-    [self.scrollView setContentSize:CGSizeMake(320, 1000)];
+    [self.scrollView setContentSize:CGSizeMake(320, 920)];
+    
+    //calculate View position
+    [self putImage];
     
     
 }
@@ -130,6 +131,9 @@
     for(int i = 0;i < imageArray.count;i++){
         [self.imageButton addSubview:imageArray[i]];
     }
+    
+    //set scroller Y
+    currentScrollerY = self.scrollView.frame.size.height;
     
 }
 
@@ -192,6 +196,156 @@
     
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)aScrollView {
+	
+	CGPoint offset = aScrollView.contentOffset;
+	CGRect bounds = aScrollView.bounds;
+	CGSize size = aScrollView.contentSize;
+	UIEdgeInsets inset = aScrollView.contentInset;
+	float y = offset.y + bounds.size.height - inset.bottom;
+	float h = size.height;
+//	 NSLog(@"offset: %f", offset.y);
+//	 NSLog(@"content.height: %f", size.height);
+//	 NSLog(@"bounds.height: %f", bounds.size.height);
+//	 NSLog(@"inset.top: %f", inset.top);
+//	 NSLog(@"inset.bottom: %f", inset.bottom);
+//    NSLog(@"pos: %f of %f", y, h);
+//    NSLog(@"top: %f",y-self.scrollView.frame.size.height);
+    float diff = y -currentScrollerY;
+    if(y>518 && y<920){
+        if(diff>0) {
+            //down
+            der = 1;
+            if(diff > 7.0){
+                [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                [UIView animateWithDuration:0.3 animations:^{
+                    [self.myNavibar setFrame:CGRectMake(0, -30, 320, 30)];
+                    [self.scrollView setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+                } completion:^(BOOL finshed){
+                }];
+                
+            }
+        } else {
+            //up
+            der = 0;
+            if(diff < 10.0){
+                [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                [UIView animateWithDuration:0.3 animations:^{
+                    [self.myNavibar setFrame:CGRectMake(0, 0, 320, 30)];
+                    NSLog(@"height %f",self.view.frame.size.height-30);
+                    [self.scrollView setFrame:CGRectMake(0, 30, 320, 518)];
+                } completion:^(BOOL finshed){
+                }];
+            }
+        }
+    }
+    
+    [self moveBlowImage:y];
+    [self moveAboveImage:y];
+        
+    currentScrollerY = y;
+	
+}
+
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView {
+//    CGPoint offset = aScrollView.contentOffset;
+//	CGRect bounds = aScrollView.bounds;
+//	UIEdgeInsets inset = aScrollView.contentInset;
+//	float y = offset.y + bounds.size.height - inset.bottom;
+//    [self scrollTopTopos:y-518.0];
+//    NSLog(@"scrollViewDidEndDecelerating  -   End of Scrolling.");
+//}
+//// 触摸屏幕并拖拽画面，再松开，最后停止时，触发该函数
+//- (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView willDecelerate:(BOOL)decelerate {
+//    CGPoint offset = aScrollView.contentOffset;
+//	CGRect bounds = aScrollView.bounds;
+//	UIEdgeInsets inset = aScrollView.contentInset;
+//	float y = offset.y + bounds.size.height - inset.bottom;
+//    [self scrollTopTopos:y-518.0];
+//    NSLog(@"scrollViewDidEndDragging  -  End of Scrolling.");
+//}
+
+
+
+-(void) putImage {
+    int sHeight = self.view.frame.size.height;
+    if(self.imageWrap5.frame.origin.y > sHeight){
+        [self.imageWrap5 setFrame:CGRectMake(3, 1000, 320, 140)];
+    }
+    if(self.imageWrap4.frame.origin.y > sHeight){
+        [self.imageWrap4 setFrame:CGRectMake(3, 867, 320, 130)];
+    }
+
+}
+
+-(void) moveBlowImage:(float)y{
+    //down
+
+    if(y > 639 && der == 1){
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.imageWrap4 setFrame:CGRectMake(3, 645, 320, 130)];
+        } completion:^(BOOL finshed){
+        }];
+    }
+    if(y > 772 && der == 1){
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.imageWrap5 setFrame:CGRectMake(3, 778, 320, 140)];
+        } completion:^(BOOL finshed){
+        }];
+    }
+    //up
+
+    if(y < 639 && der == 0){
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.imageWrap4 setFrame:CGRectMake(3, 867, 320, 130)];
+        } completion:^(BOOL finshed){
+        }];
+    }
+    if(y < 772 && der == 0){
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.imageWrap5 setFrame:CGRectMake(3, 1000, 320, 140)];
+        } completion:^(BOOL finshed){
+        }];
+    }
+
+}
+
+-(void) moveAboveImage:(float)y{
+    float top = y - self.view.frame.size.height;
+    NSLog(@"top %f",top);
+    if(top > 260 && der == 1){
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.imageWrap0 setFrame:CGRectMake(3, -137, 320, 260)];
+        } completion:^(BOOL finshed){
+        }];
+    }
+    if(top < 260 && der == 0){
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.imageWrap0 setFrame:CGRectMake(3, 3, 320, 260)];
+        } completion:^(BOOL finshed){
+        }];
+    }
+    if(top > 363 && der == 1){
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.imageWrap1 setFrame:CGRectMake(3, -37, 320, 100)];
+        } completion:^(BOOL finshed){
+        }];
+    }
+    if(top < 363 && der == 0){
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.imageWrap1 setFrame:CGRectMake(3, 266, 320, 100)];
+        } completion:^(BOOL finshed){
+        }];
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {

@@ -233,6 +233,7 @@
 			self.frontView.frame = CGRectMake(0.0f, 0.0f, self.frontView.frame.size.width, self.frontView.frame.size.height);
 		}
 	}
+    NSLog(@"drag = %u",_currentFrontViewPosition);
 }
 
 // Instantaneously toggle the rear view's visibility.
@@ -280,6 +281,7 @@
 		
 		self.currentFrontViewPosition = FrontViewPositionLeft;
 	}
+    NSLog(@"toggle = %u",_currentFrontViewPosition);
 }
 
 - (void)setFrontViewController:(UIViewController *)frontViewController
