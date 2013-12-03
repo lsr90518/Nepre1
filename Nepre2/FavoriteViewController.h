@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "ZUUIRevealController.h"
 
-@interface FavoriteViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
+@interface FavoriteViewController : UIViewController<UIScrollViewDelegate>{
     int sideFlag;
+    float cellHeight;
+    int currentScrollerY;
+    int der;
+    NSMutableArray *position1;
+    NSMutableArray *position2;
+    int animat;
+    int scrolling;
 }
+
+@property NSArray *items;
 
 @end

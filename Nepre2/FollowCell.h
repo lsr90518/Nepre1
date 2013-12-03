@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FollowCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *avatarIcon;
-@property (weak, nonatomic) IBOutlet UIButton *followButton;
+@property (retain, nonatomic) IBOutlet UIImageView *avatarIcon;
+@property (retain, nonatomic) IBOutlet UIButton *followButton;
 
 @end

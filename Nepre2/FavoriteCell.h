@@ -13,7 +13,7 @@
     UITableView *hortable;
     NSInteger porsection;
 }
-@property (weak, nonatomic) IBOutlet UIButton *authorButton;
-@property (weak, nonatomic) IBOutlet UIButton *plusButton;
+@property (retain, nonatomic) IBOutlet UIButton *authorButton;
+@property (retain, nonatomic) IBOutlet UIButton *plusButton;
 
 @end

@@ -15,13 +15,13 @@
 @interface FoodViewController ()
 
 @property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
-@property (weak, nonatomic) IBOutlet UIButton *menuButton;
+@property (retain, nonatomic) IBOutlet UIButton *menuButton;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIButton *imageButton;
-@property (weak, nonatomic) IBOutlet UIView *myNavibar;
-@property (weak, nonatomic) IBOutlet UIView *slideView;
-@property (weak, nonatomic) IBOutlet UIView *cameraView;
+@property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (retain, nonatomic) IBOutlet UIButton *imageButton;
+@property (retain, nonatomic) IBOutlet UIView *myNavibar;
+@property (retain, nonatomic) IBOutlet UIView *slideView;
+@property (retain, nonatomic) IBOutlet UIView *cameraView;
 
 @end
 
@@ -238,10 +238,11 @@
                 }];
             }
         }
+        [self moveBlowImage:y];
+        [self moveAboveImage:y];
     }
     
-    [self moveBlowImage:y];
-    [self moveAboveImage:y];
+    
         
     currentScrollerY = y;
 	
@@ -316,7 +317,6 @@
 
 -(void) moveAboveImage:(float)y{
     float top = y - self.view.frame.size.height;
-    NSLog(@"top %f",top);
     if(top > 260 && der == 1){
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
         [UIView animateWithDuration:0.3 animations:^{

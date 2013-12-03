@@ -11,7 +11,7 @@
 @interface FollowViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
     int sideFlag;
 }
-@property (weak, nonatomic) IBOutlet UITableView *followTable;
-@property (weak, nonatomic) IBOutlet UITableView *followerTable;
+@property (retain, nonatomic) IBOutlet UITableView *followTable;
+@property (retain, nonatomic) IBOutlet UITableView *followerTable;
 
 @end

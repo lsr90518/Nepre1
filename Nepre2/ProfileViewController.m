@@ -13,9 +13,9 @@
 @interface ProfileViewController ()
 
 @property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
-@property (weak, nonatomic) IBOutlet UIButton *menuButton;
-@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
-@property (weak, nonatomic) IBOutlet UIView *slideView;
+@property (retain, nonatomic) IBOutlet UIButton *menuButton;
+@property (retain, nonatomic) IBOutlet UIScrollView *scroller;
+@property (retain, nonatomic) IBOutlet UIView *slideView;
 
 @end
 
@@ -62,10 +62,11 @@
     [self.scroller setContentSize:CGSizeMake(320, 1000)];
 }
 - (IBAction)goFavorite:(id)sender {
+    FavoriteViewController * fvc = [[FavoriteViewController alloc]init];
     
-    FavoriteViewController *f = [[FavoriteViewController alloc]init];
-    [self.navigationController pushViewController:f animated:NO];
+    [self.navigationController pushViewController:fvc animated:NO];
 }
+
 - (IBAction)goFollow:(id)sender {
     
     FollowViewController *follow = [[FollowViewController alloc]init];

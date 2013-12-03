@@ -11,10 +11,14 @@
 
 #import "ZUUIRevealController.h"
 
-@interface FoodLocationViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate>{
+@interface FoodLocationViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate,MKOverlay>{
     CLLocationManager *locationManager;
     CLLocation *checkinLocation;
     int sideFlag;
+    NSArray *arrRoutePoints;
+    MKPolygon *objpolygon;
+    MKPolyline *objPolyline;
+    CLLocationCoordinate2D currentLocation;
 }
 
 @end

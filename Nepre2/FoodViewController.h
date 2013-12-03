@@ -15,11 +15,11 @@
     int currentScrollerY;
     int der;
 }
-@property (weak, nonatomic) IBOutlet UIView *imageWrap0;
-@property (weak, nonatomic) IBOutlet UIView *imageWrap1;
-@property (weak, nonatomic) IBOutlet UIView *imageWrap2;
-@property (weak, nonatomic) IBOutlet UIView *imageWrap3;
-@property (weak, nonatomic) IBOutlet UIView *imageWrap4;
-@property (weak, nonatomic) IBOutlet UIView *imageWrap5;
+@property (retain, nonatomic) IBOutlet UIView *imageWrap0;
+@property (retain, nonatomic) IBOutlet UIView *imageWrap1;
+@property (retain, nonatomic) IBOutlet UIView *imageWrap2;
+@property (retain, nonatomic) IBOutlet UIView *imageWrap3;
+@property (retain, nonatomic) IBOutlet UIView *imageWrap4;
+@property (retain, nonatomic) IBOutlet UIView *imageWrap5;
 
 @end

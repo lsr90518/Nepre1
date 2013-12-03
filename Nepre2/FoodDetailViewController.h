@@ -14,6 +14,10 @@
     float cellHeight;
     int currentScrollerY;
     int der;
+    NSMutableArray *position1;
+    NSMutableArray *position2;
+    int animat;
+    int scrolling;
 }
 @property NSArray *items;
 

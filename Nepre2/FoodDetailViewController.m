@@ -15,11 +15,11 @@
 
 
 @property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
-@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
-@property (weak, nonatomic) IBOutlet UIView *myNavibar;
+@property (retain, nonatomic) IBOutlet UIScrollView *scroller;
+@property (retain, nonatomic) IBOutlet UIView *myNavibar;
 
-@property (weak, nonatomic) IBOutlet UIButton *menuButton;
-@property (weak, nonatomic) IBOutlet UIView *slideView;
+@property (retain, nonatomic) IBOutlet UIButton *menuButton;
+@property (retain, nonatomic) IBOutlet UIView *slideView;
 
 @end
 
@@ -38,6 +38,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    position1 = [[NSMutableArray alloc]init];
+    position2 = [[NSMutableArray alloc]init];
+    animat = 0;//不是动画
     
     self.navigationController.navigationBar.hidden = YES;
     
@@ -60,7 +64,8 @@
         float newHeight = 320.0/rate;
         cellHeight = newHeight;
     
-        UIScrollView *detailScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, inity, 320, newHeight)];
+        UIView *detailView = [[UIView alloc]initWithFrame:CGRectMake(0, inity, 320, newHeight)];
+        UIScrollView *detailScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, newHeight)];
         UIImageView *detailImageview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, newHeight)];
         detailImageview.image = foodImage;
         UIImageView *likeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(270, newHeight-50, 40, 40)];
@@ -81,21 +86,22 @@
         [detailScroll addSubview:detailImageview];
         [detailScroll setBackgroundColor:[UIColor blackColor]];
         [detailScroll setShowsHorizontalScrollIndicator:NO];
-        [detailScroll setTag:i];
-        [self.scroller addSubview:detailScroll];
+        [detailScroll setDelegate:self];
+        [detailView setTag:i];
+        [detailView addSubview:detailScroll];
         
         //went people
         int wentPersonX = 5;
         float wentY;
         for(int j = 0;j<3;j++){
             wentY = cellHeight-45.0;
-            wentY = wentY + (float)inity;
+            
             
             UIImageView *wentperson = [[UIImageView alloc]initWithFrame:CGRectMake(wentPersonX, wentY, 35, 35)];
             NSString *wentPersonIconFileName = [NSString stringWithFormat:@"_icon-0%d",j+1];
             wentperson.image = [UIImage imageNamed:wentPersonIconFileName];
             wentPersonX = wentPersonX + 40;
-            [self.scroller addSubview:wentperson];
+            [detailView addSubview:wentperson];
         }
         
         //went num
@@ -108,18 +114,23 @@
         wentNumLabel.textAlignment = UITextAlignmentCenter;
         [wentNumLabel setBackgroundColor:[UIColor clearColor]];
         [wentNumView addSubview:wentNumLabel];
-        [self.scroller addSubview:wentNumView];
+        [detailView addSubview:wentNumView];
         
         
         //map
-        UIButton *mapButton = [[UIButton alloc]initWithFrame:CGRectMake(270, 5+inity, 45, 45)];
+        UIButton *mapButton = [[UIButton alloc]initWithFrame:CGRectMake(270, 5, 45, 45)];
         [mapButton setImage:[UIImage imageNamed:@"icon-01"] forState:UIControlStateNormal];
         [mapButton addTarget:self action:@selector(goMap:) forControlEvents:UIControlEventTouchUpInside];
-        [self.scroller addSubview:mapButton];
+        [detailView addSubview:mapButton];
         
         inity = inity + cellHeight+15;
+        [self.scroller addSubview:detailView];
+        [position1 addObject:[NSNumber numberWithFloat:detailView.frame.origin.y]];
+        float bottom = detailView.frame.origin.y+detailView.frame.size.height;
+        [position2 addObject:[NSNumber numberWithFloat:bottom]];
     }
-[self.scroller setContentSize:CGSizeMake(320, inity)];
+    [self.scroller setContentSize:CGSizeMake(320, inity)];
+    
 }
 
 
@@ -138,58 +149,10 @@
     
     //			[self.navigationController.view addGestureRecognizer:self.navigationBarPanGestureRecognizer];
     [self.slideView addGestureRecognizer:self.navigationBarPanGestureRecognizer];
-    
-    
+    [self putImage];
 }
 
 
-#pragma mark - TableView Methods
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.items count]; // or self.items.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"%d",indexPath.row);
-    static NSString *CellIdentifier = @"FoodDetailCell";
-    
-    FoodDetailCell *cell = [[FoodDetailCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    
-    //input image
-    UIImage *imageHolder = [UIImage imageNamed:@"icon-06"];
-    NSString *imageFileName = [NSString stringWithFormat:@"f%d.jpg",indexPath.row+1];
-
-    cell.detailImageView.image = [UIImage imageNamed:imageFileName];
-
-    //input mapView
-    [cell.mapButton addTarget:self action:@selector(goMap:) forControlEvents:UIControlEventTouchDown];
-    if (cell == nil) {
-        cell = [[FoodDetailCell alloc]init];
-        
-    }
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *imageFileName = [NSString stringWithFormat:@"f%d.jpg",indexPath.row+1];
-    UIImage *foodImage = [UIImage imageNamed:imageFileName];
-    float imageWidth = foodImage.size.width;
-    float imageHeight = foodImage.size.height;
-    NSLog(@"width = %f, height= %f",imageWidth,imageHeight);
-    float rate = imageWidth/imageHeight;
-    float newHeight = 320.0/rate;
-    NSLog(@"rate=%f   newheight=%f",rate,newHeight);
-    cellHeight = newHeight;
-    return cellHeight;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"ok");
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
@@ -222,13 +185,15 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView {
-	
+	scrolling = 1;
 	CGPoint offset = aScrollView.contentOffset;
 	CGRect bounds = aScrollView.bounds;
 	CGSize size = aScrollView.contentSize;
 	UIEdgeInsets inset = aScrollView.contentInset;
 	float y = offset.y + bounds.size.height - inset.bottom;
 	float h = size.height;
+    float top = y - self.scroller.frame.size.height;
+    float x = offset.x;
 //    	 NSLog(@"offset: %f", offset.y);
 //    	 NSLog(@"content.height: %f", size.height);
 //    	 NSLog(@"bounds.height: %f", bounds.size.height);
@@ -239,123 +204,119 @@
     float diff = y -currentScrollerY;
 //    NSLog(@"%f",diff);
     
+    NSNumber *bottomLine;
+    NSNumber *topLine;
+    
     if(y>bounds.size.height && y<aScrollView.contentSize.height){
         if(diff>0) {
             //down
             der = 1;
-            if(diff > 7.0){
-                [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                [UIView animateWithDuration:0.3 animations:^{
-                    [self.myNavibar setFrame:CGRectMake(0, -30, 320, 30)];
-                    [self.scroller setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-                } completion:^(BOOL finshed){
-                }];
+            if(diff > 10.0){
+                if(animat == 0){
+                    [UIView animateWithDuration:0.3 animations:^{
+                        animat = 1;
+                        [self.myNavibar setFrame:CGRectMake(0, -30, 320, 30)];
+                        [self.scroller setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+                    } completion:^(BOOL finshed){
+                        animat = 0;
+                    }];
+                }
                 
             }
+            
+            //move image function
+            for (int i = 0;i<[position1 count];i++){
+                topLine = [position1 objectAtIndex:i];
+                bottomLine = [position2 objectAtIndex:i];
+                if(y > [topLine floatValue]+10.0 && y <[bottomLine floatValue]){
+                    UIView *tempView = (UIView *)[self.scroller viewWithTag:i];
+                    [UIView animateWithDuration:0.3 animations:^{
+                        [tempView setFrame:CGRectMake(tempView.frame.origin.x, [topLine floatValue], tempView.frame.size.width, tempView.frame.size.height)];
+                    } completion:^(BOOL finshed){
+                    }];
+                }
+                
+                if(top > [bottomLine floatValue]-10){
+                    UIView *tempView = (UIView *)[self.scroller viewWithTag:i];
+                    [UIView animateWithDuration:0.3 animations:^{
+                        [tempView setFrame:CGRectMake(tempView.frame.origin.x, [topLine floatValue]-100.0, tempView.frame.size.width, tempView.frame.size.height)];
+                    } completion:^(BOOL finshed){
+                    }];
+                }
+            }
+            
         } else {
             //up
             der = 0;
-            if(diff < 10.0){
-                [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                [UIView animateWithDuration:0.3 animations:^{
-                    [self.myNavibar setFrame:CGRectMake(0, 0, 320, 30)];
-                    NSLog(@"height %f",self.view.frame.size.height-30);
-                    [self.scroller setFrame:CGRectMake(0, 30, 320, 518)];
-                } completion:^(BOOL finshed){
-                }];
+            if(diff < -10.0){
+                if(animat == 0){
+                    [UIView animateWithDuration:0.3 animations:^{
+                        animat = 1;
+                        [self.myNavibar setFrame:CGRectMake(0, 0, 320, 30)];
+                        [self.scroller setFrame:CGRectMake(0, 30, 320, 518)];
+                    } completion:^(BOOL finshed){
+                        animat = 0;
+                    }];
+                }
+            }
+            
+            for (int i = 0;i<[position1 count];i++){
+                topLine = [position1 objectAtIndex:i];
+                bottomLine = [position2 objectAtIndex:i];
+            
+                if(y < [topLine floatValue]){
+                    UIView *tempView = (UIView *)[self.scroller viewWithTag:i];
+                    [UIView animateWithDuration:1.0 animations:^{
+                        [tempView setFrame:CGRectMake(tempView.frame.origin.x, [topLine floatValue]+100, tempView.frame.size.width, tempView.frame.size.height)];
+                    } completion:^(BOOL finshed){
+                    }];
+                }
+                
+                if(top < [bottomLine floatValue]-10 && top > [topLine floatValue]){
+                    UIView *tempView = (UIView *)[self.scroller viewWithTag:i];
+                    [UIView animateWithDuration:0.3 animations:^{
+                        [tempView setFrame:CGRectMake(tempView.frame.origin.x, [topLine floatValue], tempView.frame.size.width, tempView.frame.size.height)];
+                    } completion:^(BOOL finshed){
+                    }];
+                }
+                
             }
         }
     }
-//
-//    [self moveBlowImage:y];
-//    [self moveAboveImage:y];
     
     currentScrollerY = y;
 	
 }
 
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)aScrollView{
 
+}
+-(void) scrollViewDidEndDragging:(UIScrollView *)aScrollView willDecelerate:(BOOL)decelerate{
+//    NSLog(@"%c",decelerate);
+//    if(aScrollView.tag != 100){
+//        CGPoint offset = aScrollView.contentOffset;
+//        float x = offset.x;
+//        NSLog(@"%f",x);
+//        if(x < 200){
+//            [aScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+//        } else {
+//            [aScrollView setContentOffset:CGPointMake(320, 0) animated:YES];
+//        }
+//    }
+}
 
 -(void) putImage {
-//    int sHeight = self.view.frame.size.height;
-//    if(self.imageWrap5.frame.origin.y > sHeight){
-//        [self.imageWrap5 setFrame:CGRectMake(3, 1000, 320, 140)];
-//    }
-//    if(self.imageWrap4.frame.origin.y > sHeight){
-//        [self.imageWrap4 setFrame:CGRectMake(3, 867, 320, 130)];
-//    }
+    int sHeight = self.scroller.frame.size.height;
+    for(int i = 13;i>-1;i--){
+        UIView *tempView = (UIView *)[self.scroller viewWithTag:i];
+        if(tempView.frame.origin.y >sHeight){
+            [tempView setFrame:CGRectMake(tempView.frame.origin.x, tempView.frame.origin.y+100.0, tempView.frame.size.width, tempView.frame.size.height)];
+        }
+        
+    }
     
 }
 //
-//-(void) moveBlowImage:(float)y{
-//    //down
-//    
-//    if(y > 639 && der == 1){
-//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//        [UIView animateWithDuration:0.3 animations:^{
-//            [self.imageWrap4 setFrame:CGRectMake(3, 645, 320, 130)];
-//        } completion:^(BOOL finshed){
-//        }];
-//    }
-//    if(y > 772 && der == 1){
-//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//        [UIView animateWithDuration:0.3 animations:^{
-//            [self.imageWrap5 setFrame:CGRectMake(3, 778, 320, 140)];
-//        } completion:^(BOOL finshed){
-//        }];
-//    }
-//    //up
-//    
-//    if(y < 639 && der == 0){
-//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//        [UIView animateWithDuration:0.3 animations:^{
-//            [self.imageWrap4 setFrame:CGRectMake(3, 867, 320, 130)];
-//        } completion:^(BOOL finshed){
-//        }];
-//    }
-//    if(y < 772 && der == 0){
-//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//        [UIView animateWithDuration:0.3 animations:^{
-//            [self.imageWrap5 setFrame:CGRectMake(3, 1000, 320, 140)];
-//        } completion:^(BOOL finshed){
-//        }];
-//    }
-//    
-//}
-//
-//-(void) moveAboveImage:(float)y{
-//    float top = y - self.view.frame.size.height;
-//    NSLog(@"top %f",top);
-//    if(top > 260 && der == 1){
-//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//        [UIView animateWithDuration:0.3 animations:^{
-//            [self.imageWrap0 setFrame:CGRectMake(3, -137, 320, 260)];
-//        } completion:^(BOOL finshed){
-//        }];
-//    }
-//    if(top < 260 && der == 0){
-//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//        [UIView animateWithDuration:0.3 animations:^{
-//            [self.imageWrap0 setFrame:CGRectMake(3, 3, 320, 260)];
-//        } completion:^(BOOL finshed){
-//        }];
-//    }
-//    if(top > 363 && der == 1){
-//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//        [UIView animateWithDuration:0.3 animations:^{
-//            [self.imageWrap1 setFrame:CGRectMake(3, -37, 320, 100)];
-//        } completion:^(BOOL finshed){
-//        }];
-//    }
-//    if(top < 363 && der == 0){
-//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//        [UIView animateWithDuration:0.3 animations:^{
-//            [self.imageWrap1 setFrame:CGRectMake(3, 266, 320, 100)];
-//        } completion:^(BOOL finshed){
-//        }];
-//    }
-//}
-
 
 - (void)didReceiveMemoryWarning
 {
