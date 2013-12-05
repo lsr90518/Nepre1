@@ -12,11 +12,11 @@
 
 @interface TimelineViewController ()
 
-@property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
-@property (retain, nonatomic) IBOutlet UIButton *menuButton;
-@property (retain, nonatomic) IBOutlet UIScrollView *scroller;
-@property (retain, nonatomic) IBOutlet UIView *slideView;
-@property (retain, nonatomic) IBOutlet UIView *myNavibar;
+@property (weak, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
+@property (weak, nonatomic) IBOutlet UIButton *menuButton;
+@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
+@property (weak, nonatomic) IBOutlet UIView *slideView;
+@property (weak, nonatomic) IBOutlet UIView *myNavibar;
 
 @end
 
@@ -61,13 +61,13 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
-//    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goFood)];
-//    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-//    [self.view addGestureRecognizer:swipeLeft];
-//    
-//    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goSpot)];
-//    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
-//    [self.view addGestureRecognizer:swipeRight];
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goFood)];
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.scroller addGestureRecognizer:swipeLeft];
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goSpot)];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.scroller addGestureRecognizer:swipeRight];
     
     position1 = [[NSMutableArray alloc]init];
     position2 = [[NSMutableArray alloc]init];
@@ -77,14 +77,11 @@
     
     self.items = [[NSArray alloc]initWithObjects:@"f4.jpg",@"2.jpg",@"13.jpg",@"4.jpg",@"f5.jpg",@"6.jpg",@"f7.jpg",@"8.jpg",@"9.jpg",@"10.jpg",@"11.jpg",@"f12.jpg",@"f13.jpg",@"14.jpg",@"15.jpg",@"f16.jpg",@"17.jpg",@"18.jpg",@"19.jpg",@"20.jpg", nil];
     
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goFood)];
+//    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goFood)];
     
-    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionRight];
-    
-    [self.scroller addGestureRecognizer:swipeLeft];
     int inity = 15;
     
-    for(int i = 0;i<14;i++){
+    for(int i = 0;i<8;i++){
         //make detail view
         //foodImage
         NSString *imageFileName = [NSString stringWithFormat:@"%d.jpg",i+1];

@@ -113,7 +113,10 @@
     ottawa.title = @"Parliament of Canada";
     ottawa.subtitle = @"Oh Canada!";
     ottawa.coordinate = CLLocationCoordinate2DMake(34.070351,134.554911);
-    ottawa.disclosureBlock = ^{ [self beginNavigation]; };
+    ottawa.disclosureBlock = ^{
+        [self beginNavigation];
+        [self centerMap];
+    };
     
     [annotations addObject:[[JPSThumbnailAnnotation alloc] initWithThumbnail:ottawa]];
     
@@ -162,7 +165,7 @@
            fromLocation:(CLLocation *)oldLocation {
     checkinLocation = newLocation;
     CLLocationCoordinate2D centerCoord = {checkinLocation.coordinate.latitude,checkinLocation.coordinate.longitude};
-//    [self.mapView setCenterCoordinate:centerCoord zoomLevel:13 animated:NO];
+    [self.mapView setCenterCoordinate:centerCoord zoomLevel:13 animated:NO];
     currentLocation = centerCoord;
 //    [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(34.070365,134.559553)];
 }
@@ -280,7 +283,7 @@
 - (void)centerMap
 {
 
-    [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(34.070365,134.559553) zoomLevel:13 animated:YES];
+    [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(currentLocation.latitude,currentLocation.longitude) zoomLevel:13 animated:YES];
 }
 
 

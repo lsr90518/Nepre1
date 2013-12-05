@@ -10,16 +10,17 @@
 #import "FoodViewController.h"
 #import "FoodDetailCell.h"
 #import "FoodLocationViewController.h"
+#import "Mydata.h"
 
 @interface FoodDetailViewController ()
 
 
-@property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
-@property (retain, nonatomic) IBOutlet UIScrollView *scroller;
-@property (retain, nonatomic) IBOutlet UIView *myNavibar;
+@property (weak, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
+@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
+@property (weak, nonatomic) IBOutlet UIView *myNavibar;
 
-@property (retain, nonatomic) IBOutlet UIButton *menuButton;
-@property (retain, nonatomic) IBOutlet UIView *slideView;
+@property (weak, nonatomic) IBOutlet UIButton *menuButton;
+@property (weak, nonatomic) IBOutlet UIView *slideView;
 
 @end
 
@@ -39,13 +40,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //huwahuwa initail
     position1 = [[NSMutableArray alloc]init];
     position2 = [[NSMutableArray alloc]init];
     animat = 0;//不是动画
     
     self.navigationController.navigationBar.hidden = YES;
     
-    self.items = [[NSArray alloc]initWithObjects:@"1.jpg",@"2.jpg",@"3.jpg",@"4.jpg",@"5.jpg",@"6.jpg",@"7.jpg",@"8.jpg",@"9.jpg",@"10.jpg",@"11.jpg",@"12.jpg",@"13.jpg",@"14.jpg",@"15.jpg",@"16.jpg",@"17.jpg",@"18.jpg",@"19.jpg",@"20.jpg", nil];
+    //连服务器，获取数据
+    
+//    self.items = [[NSArray alloc]initWithObjects:@"1.jpg",@"2.jpg",@"3.jpg",@"4.jpg",@"5.jpg",@"6.jpg",@"7.jpg",@"8.jpg",@"9.jpg",@"10.jpg",@"11.jpg",@"12.jpg",@"13.jpg",@"14.jpg",@"15.jpg",@"16.jpg",@"17.jpg",@"18.jpg",@"19.jpg",@"20.jpg", nil];
+    
+    self.items = [[NSArray alloc]initWithArray:[Mydata sharedSingleton].imageViewnameArray];
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goFood)];
     
@@ -54,9 +60,9 @@
     [self.scroller addGestureRecognizer:swipeLeft];
     int inity = 15;
     
-    for(int i = 0;i<14;i++){
+    for(int i = 0;i<self.items.count;i++){
     //make detail view
-        NSString *imageFileName = [NSString stringWithFormat:@"f%d.jpg",i+1];
+        NSString *imageFileName = [NSString stringWithFormat:@"%@",self.items[i]];
         UIImage *foodImage = [UIImage imageNamed:imageFileName];
         float imageWidth = foodImage.size.width;
         float imageHeight = foodImage.size.height;
@@ -68,6 +74,8 @@
         UIScrollView *detailScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, newHeight)];
         UIImageView *detailImageview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, newHeight)];
         detailImageview.image = foodImage;
+        
+        //likeImageview
         UIImageView *likeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(270, newHeight-50, 40, 40)];
         likeImageView.image = [UIImage imageNamed:@"icon-09"];
         UILabel *numLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
@@ -77,12 +85,11 @@
         numLabel.textColor = [UIColor whiteColor];
         [likeImageView addSubview:numLabel];
         [detailImageview addSubview:likeImageView];
-
+        
         
         //init scroller
-        [detailScroll setContentSize:CGSizeMake(640, 0)];
+        [detailScroll setContentSize:CGSizeMake(1600, 0)];
         [detailScroll setAlwaysBounceVertical:NO];
-        [detailScroll setBackgroundColor:[UIColor whiteColor]];
         [detailScroll addSubview:detailImageview];
         [detailScroll setBackgroundColor:[UIColor blackColor]];
         [detailScroll setShowsHorizontalScrollIndicator:NO];
@@ -125,11 +132,14 @@
         
         inity = inity + cellHeight+15;
         [self.scroller addSubview:detailView];
+        
+        //huwahuwa initail2
         [position1 addObject:[NSNumber numberWithFloat:detailView.frame.origin.y]];
         float bottom = detailView.frame.origin.y+detailView.frame.size.height;
         [position2 addObject:[NSNumber numberWithFloat:bottom]];
     }
     [self.scroller setContentSize:CGSizeMake(320, inity)];
+    
     
 }
 
@@ -151,7 +161,6 @@
     [self.slideView addGestureRecognizer:self.navigationBarPanGestureRecognizer];
     [self putImage];
 }
-
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -194,13 +203,6 @@
 	float h = size.height;
     float top = y - self.scroller.frame.size.height;
     float x = offset.x;
-//    	 NSLog(@"offset: %f", offset.y);
-//    	 NSLog(@"content.height: %f", size.height);
-//    	 NSLog(@"bounds.height: %f", bounds.size.height);
-//    	 NSLog(@"inset.top: %f", inset.top);
-//    	 NSLog(@"inset.bottom: %f", inset.bottom);
-//        NSLog(@"pos: %f of %f", y, h);
-//        NSLog(@"top: %f",y-aScrollView.frame.size.height);
     float diff = y -currentScrollerY;
 //    NSLog(@"%f",diff);
     
@@ -285,7 +287,6 @@
     }
     
     currentScrollerY = y;
-	
 }
 
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)aScrollView{
@@ -317,6 +318,7 @@
     
 }
 //
+
 
 - (void)didReceiveMemoryWarning
 {

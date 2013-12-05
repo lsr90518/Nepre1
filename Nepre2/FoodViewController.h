@@ -9,17 +9,20 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "ZUUIRevealController.h"
+#import "JSONKit.h"
 
 @interface FoodViewController : UIViewController<UIScrollViewDelegate>{
     int sideFlag;
     int currentScrollerY;
     int der;
+    float cellHeight;
+    NSMutableArray *position1;
+    NSMutableArray *position2;
+    int animat;
+    int scrolling;
+    int refreshFlag;
 }
-@property (retain, nonatomic) IBOutlet UIView *imageWrap0;
-@property (retain, nonatomic) IBOutlet UIView *imageWrap1;
-@property (retain, nonatomic) IBOutlet UIView *imageWrap2;
-@property (retain, nonatomic) IBOutlet UIView *imageWrap3;
-@property (retain, nonatomic) IBOutlet UIView *imageWrap4;
-@property (retain, nonatomic) IBOutlet UIView *imageWrap5;
+
+@property (strong, nonatomic) NSMutableData *recieveData;
 
 @end

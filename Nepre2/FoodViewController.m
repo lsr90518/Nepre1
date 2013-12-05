@@ -11,17 +11,21 @@
 #import "PlaceViewController.h"
 #import "FoodDetailViewController.h"
 #import "TimelineViewController.h"
+#import "AppDelegate.h"
+#import "Mydata.h"
+#import "ProfileViewController.h"
 
 @interface FoodViewController ()
 
-@property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
-@property (retain, nonatomic) IBOutlet UIButton *menuButton;
+@property (weak, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
+@property (weak, nonatomic) IBOutlet UIButton *menuButton;
 
-@property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (retain, nonatomic) IBOutlet UIButton *imageButton;
-@property (retain, nonatomic) IBOutlet UIView *myNavibar;
-@property (retain, nonatomic) IBOutlet UIView *slideView;
-@property (retain, nonatomic) IBOutlet UIView *cameraView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
+@property (weak, nonatomic) IBOutlet UIView *myNavibar;
+@property (weak, nonatomic) IBOutlet UIView *slideView;
+@property (weak, nonatomic) IBOutlet UIView *cameraView;
+@property (weak, nonatomic) UIActivityIndicatorView *spinner;
+@property (weak, nonatomic) UILabel *sorryLabel;
 
 @end
 
@@ -46,6 +50,19 @@
     
     
 //    self.scroller.scrollEnabled = YES;
+    //设置旋转标识
+    self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self.spinner setFrame:CGRectMake(120, 45, 10, 10)]; // I do this because I'm in landscape mode
+    self.sorryLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 35, 320, 30)];
+    self.sorryLabel.backgroundColor = [UIColor blackColor];
+    self.sorryLabel.text = @"Sorry...";
+    self.sorryLabel.textColor = [UIColor whiteColor];
+    self.sorryLabel.textAlignment = UITextAlignmentCenter;
+    [self.sorryLabel setHidden:YES];
+    [self.view addSubview:self.sorryLabel];
+    [self.view addSubview:self.spinner];
+    
+    
     
     UIColor *foodColor = [[UIColor alloc]initWithRed:69.0f/255.0f green:3.0f/255.0f blue:7.0f/255.0f alpha:1.0f];
     
@@ -90,7 +107,7 @@
     
     
     self.navigationController.navigationBar.hidden = YES;
-    [self.scrollView setContentSize:CGSizeMake(320, 920)];
+
     
     //calculate View position
     [self putImage];
@@ -103,44 +120,124 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    //huwahuwa initail
+    position1 = [[NSMutableArray alloc]init];
+    position2 = [[NSMutableArray alloc]init];
+    animat = 0;//不是动画
+    refreshFlag = 0;
+    
+    //check
+    
+    if([Mydata sharedSingleton].foodViewArray == nil){
+        [self initDataArray];
+    }
+    
     NSMutableArray *imageArray = [[NSMutableArray alloc]init];
-    int userWentCount = 8;
-    int x = 5;
-    for(int i = 0;i < 3;i++){
-        NSString *fileName = [NSString stringWithFormat:@"_icon-0%d",i+1];
-        UIImage *userIcon = [UIImage imageNamed:fileName];
-        UIImageView *userIconView = [[UIImageView alloc]initWithFrame:CGRectMake(x, self.imageButton.frame.size.height-35, 30, 30)];
-        x = x+35;
-        userIconView.image = userIcon;
-        [imageArray addObject:userIconView];
-    }
     
-    if(userWentCount > 3){
-        UILabel *userWentCountLabel = [[UILabel alloc]initWithFrame:CGRectMake(x, self.imageButton.frame.size.height-35, 30, 30)];
-        userWentCountLabel.text = [NSString stringWithFormat:@"+%d",userWentCount];
-        userWentCountLabel.backgroundColor = [UIColor colorWithRed:231.0/255.0 green:20.0/255.0 blue:26.0/255.0 alpha:1.0];
-        userWentCountLabel.alpha = 0.55;
-        userWentCountLabel.textColor = [UIColor whiteColor];
-        userWentCountLabel.textAlignment = UITextAlignmentCenter;
+    int imageViewY = 1;
+    int imageTagNum = 0;
+    for(int i = 0;i<[Mydata sharedSingleton].foodViewArray.count;i++){
+        NSDictionary *jsonImage = [[Mydata sharedSingleton].foodViewArray objectAtIndex:i];
+        NSArray *imageViewnameArray = [jsonImage valueForKey:@"name"];
+        NSArray *imageViewheightArray = [jsonImage valueForKey:@"height"];
+        NSArray *imageViewwidthArray = [jsonImage valueForKey:@"width"];
+        NSArray *imageViewidArray = [jsonImage valueForKey:@"id"];
         
-        [imageArray addObject:userWentCountLabel];
+        //make a image wrap view
+        UIView *homeView = [[UIView alloc]initWithFrame:CGRectMake(2, imageViewY, 320, [imageViewheightArray[0] floatValue])];
+        [homeView setBackgroundColor:[UIColor blackColor]];
+        homeView.tag = i+100;
+        [self.scroller addSubview:homeView];
+        
+        
+        
+        //paste imageView
+        int imageButtonX = 0;
+        for(int j = 0 ; j<imageViewnameArray.count ; j++){
+            
+            //add info to Mydata
+            [[Mydata sharedSingleton].imageViewnameArray addObject:imageViewnameArray[j]];
+            [[Mydata sharedSingleton].imageViewheightArray addObject:imageViewheightArray[j]];
+            [[Mydata sharedSingleton].imageViewwidthArray addObject:imageViewwidthArray[j]];
+            [[Mydata sharedSingleton].imageViewidArray addObject:imageViewidArray[j]];
+            //
+            NSString *homeImageFileName = [NSString stringWithFormat:@"%@",imageViewnameArray[j]];
+            UIButton *homeImageView = [[UIButton alloc]initWithFrame:CGRectMake(imageButtonX, 0, [imageViewwidthArray[j] floatValue], [imageViewheightArray[j] floatValue])];
+            [homeImageView setImage:[UIImage imageNamed:homeImageFileName] forState:UIControlStateNormal];
+            imageButtonX = imageButtonX + [imageViewwidthArray[j] floatValue];
+            imageButtonX = imageButtonX +2;
+            homeImageView.tag = imageTagNum;
+            imageTagNum++;
+            [homeImageView addTarget:self action:@selector(pushButton:) forControlEvents:UIControlEventTouchUpInside];
+            [homeView addSubview:homeImageView];
+            
+            //went people
+            int wentPersonX = 5;
+            float wentY = [imageViewheightArray[j] floatValue];
+            wentY = wentY - 45.0;
+            
+            if( [imageViewnameArray count] == 1){
+                int value = (arc4random() % 4) + 1;
+                int value2 = (arc4random() % 4) + 5;
+                int value3 = (arc4random() % 4) + 9;
+                int randomNum[] = {value,value2,value3};
+                for(int j = 0;j<3;j++){
+                    UIButton *wentperson = [[UIButton alloc]initWithFrame:CGRectMake(wentPersonX, wentY, 35, 35)];
+                    
+                    NSString *wentPersonIconFileName = [NSString stringWithFormat:@"_icon_-%d",randomNum[j]];
+                    wentperson.tag = randomNum[j];
+                    [wentperson addTarget:self action:@selector(goProfile:) forControlEvents:UIControlEventTouchUpInside];
+                    [wentperson setImage:[UIImage imageNamed:wentPersonIconFileName] forState:UIControlStateNormal];
+                    wentPersonX = wentPersonX + 40;
+                    [homeImageView addSubview:wentperson];
+                }
+            }
+            
+            //went num
+            UIView *wentNumView = [[UIView alloc]initWithFrame:CGRectMake(wentPersonX, wentY, 35, 35)];
+            [wentNumView setAlpha:0.75];
+            [wentNumView setBackgroundColor:[UIColor redColor]];
+            UILabel *wentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+            wentNumLabel.text = @"+8";
+            wentNumLabel.textColor= [UIColor whiteColor];
+            wentNumLabel.textAlignment = UITextAlignmentCenter;
+            [wentNumLabel setBackgroundColor:[UIColor clearColor]];
+            [wentNumView addSubview:wentNumLabel];
+            [homeImageView addSubview:wentNumView];
+            
+            //likeImageview
+            float likeX = [imageViewwidthArray[j] floatValue];
+            UIImageView *likeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(likeX-50, wentY-3, 40, 40)];
+            likeImageView.image = [UIImage imageNamed:@"icon-09"];
+            UILabel *numLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
+            numLabel.backgroundColor = [UIColor clearColor];
+            numLabel.text = [NSString stringWithFormat:@"%d",i];
+            [numLabel setTextAlignment:UITextAlignmentCenter];
+            numLabel.textColor = [UIColor whiteColor];
+            [likeImageView addSubview:numLabel];
+            [homeImageView addSubview:likeImageView];
+
+        }
+        imageViewY = imageViewY + [imageViewheightArray[0] floatValue];
+        imageViewY = imageViewY +2;
+        //huwahuwa initail2
+        [position1 addObject:[NSNumber numberWithFloat:homeView.frame.origin.y]];
+        float bottom = homeView.frame.origin.y+homeView.frame.size.height;
+        [position2 addObject:[NSNumber numberWithFloat:bottom]];
     }
     
     
-    
-    for(int i = 0;i < imageArray.count;i++){
-        [self.imageButton addSubview:imageArray[i]];
-    }
+    [self.scroller setContentSize:CGSizeMake(320, imageViewY)];
     
     //set scroller Y
-    currentScrollerY = self.scrollView.frame.size.height;
+    currentScrollerY = self.scroller.frame.size.height;
     
 }
 
 - (IBAction)pushButton:(id)sender {
     UIButton *button = (UIButton *)sender;
-    NSLog(@"%d",button.tag);
-    
+    [Mydata sharedSingleton].detailImageTag = [NSString stringWithFormat:@"%d",button.tag];
+    self.view = nil;
     FoodDetailViewController *foodDetailViewController = [[FoodDetailViewController alloc]init];
     [self.navigationController pushViewController:foodDetailViewController animated:YES];
     
@@ -175,7 +272,7 @@
         
         UIImagePickerController * picker = [[UIImagePickerController alloc]init];
         picker.delegate = self;
-        picker.allowsEditing = YES;  //是否可编辑
+        
         //摄像头
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentModalViewController:picker animated:YES];
@@ -190,161 +287,299 @@
 {
     //得到图片
     UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    //图片存入相册
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    UIImage *newImage = [self scaleImage:image toScale:0.05];
+    UIImageWriteToSavedPhotosAlbum(newImage, nil, nil, nil);
     [self dismissModalViewControllerAnimated:YES];
-    
+    image = nil;
+    newImage = nil;
+}
+
+- (UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize{
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
+    [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaledImage;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView {
-	
+	scrolling = 1;
 	CGPoint offset = aScrollView.contentOffset;
 	CGRect bounds = aScrollView.bounds;
 	CGSize size = aScrollView.contentSize;
 	UIEdgeInsets inset = aScrollView.contentInset;
 	float y = offset.y + bounds.size.height - inset.bottom;
-	float h = size.height;
-//	 NSLog(@"offset: %f", offset.y);
-//	 NSLog(@"content.height: %f", size.height);
-//	 NSLog(@"bounds.height: %f", bounds.size.height);
-//	 NSLog(@"inset.top: %f", inset.top);
-//	 NSLog(@"inset.bottom: %f", inset.bottom);
-//    NSLog(@"pos: %f of %f", y, h);
-//    NSLog(@"top: %f",y-self.scrollView.frame.size.height);
+    float top = y - self.scroller.frame.size.height;
+    //    	 NSLog(@"offset: %f", offset.y);
+    //    	 NSLog(@"content.height: %f", size.height);
+    //    	 NSLog(@"bounds.height: %f", bounds.size.height);
+    //    	 NSLog(@"inset.top: %f", inset.top);
+    //    	 NSLog(@"inset.bottom: %f", inset.bottom);
+    //        NSLog(@"pos: %f of %f", y, h);
+    //        NSLog(@"top: %f",y-aScrollView.frame.size.height);
     float diff = y -currentScrollerY;
-    if(y>518 && y<920){
-        if(diff>0) {
-            //down
-            der = 1;
-            if(diff > 7.0){
-                [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                [UIView animateWithDuration:0.3 animations:^{
-                    [self.myNavibar setFrame:CGRectMake(0, -30, 320, 30)];
-                    [self.scrollView setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-                } completion:^(BOOL finshed){
-                }];
-                
-            }
-        } else {
-            //up
-            der = 0;
-            if(diff < 10.0){
-                [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                [UIView animateWithDuration:0.3 animations:^{
-                    [self.myNavibar setFrame:CGRectMake(0, 0, 320, 30)];
-                    NSLog(@"height %f",self.view.frame.size.height-30);
-                    [self.scrollView setFrame:CGRectMake(0, 30, 320, 518)];
-                } completion:^(BOOL finshed){
-                }];
-            }
-        }
-        [self moveBlowImage:y];
-        [self moveAboveImage:y];
-    }
-    
-    
+    //    NSLog(@"%f",diff);
+//    if(refreshFlag == 0){
+        NSNumber *bottomLine;
+        NSNumber *topLine;
         
-    currentScrollerY = y;
-	
+        if(y>bounds.size.height && y<aScrollView.contentSize.height){
+            if(diff>0) {
+                //down
+                der = 1;
+                if(diff > 10.0){
+                    if(animat == 0){
+                        [UIView animateWithDuration:0.3 animations:^{
+                            animat = 1;
+                            [self.myNavibar setFrame:CGRectMake(0, -30, 320, 30)];
+                            [self.scroller setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+                        } completion:^(BOOL finshed){
+                            animat = 0;
+                        }];
+                    }
+                    
+                }
+                
+                //move image function
+                for (int i = 0;i<[position1 count];i++){
+                    topLine = [position1 objectAtIndex:i];
+                    bottomLine = [position2 objectAtIndex:i];
+                    if(y > [topLine floatValue]+10.0 && y <[bottomLine floatValue]){
+                        UIView *tempView = (UIView *)[self.scroller viewWithTag:i+100];
+                        [UIView animateWithDuration:0.3 animations:^{
+                            [tempView setFrame:CGRectMake(tempView.frame.origin.x, [topLine floatValue], tempView.frame.size.width, tempView.frame.size.height)];
+                        } completion:^(BOOL finshed){
+                        }];
+                    }
+                    
+                    if(top > [bottomLine floatValue]-10){
+                        UIView *tempView = (UIView *)[self.scroller viewWithTag:i+100];
+                        [UIView animateWithDuration:0.3 animations:^{
+                            [tempView setFrame:CGRectMake(tempView.frame.origin.x, [topLine floatValue]-100.0, tempView.frame.size.width, tempView.frame.size.height)];
+                        } completion:^(BOOL finshed){
+                        }];
+                    }
+                }
+                
+            } else {
+                //up
+                der = 0;
+                if(diff < -10.0){
+                    if(animat == 0){
+                        [UIView animateWithDuration:0.3 animations:^{
+                            animat = 1;
+                            [self.myNavibar setFrame:CGRectMake(0, 0, 320, 30)];
+                            [self.scroller setFrame:CGRectMake(0, 30, 320, 518)];
+                        } completion:^(BOOL finshed){
+                            animat = 0;
+                        }];
+                    }
+                }
+                
+                for (int i = 0;i<[position1 count];i++){
+                    topLine = [position1 objectAtIndex:i];
+                    bottomLine = [position2 objectAtIndex:i];
+                    
+                    if(y < [topLine floatValue]){
+                        UIView *tempView = (UIView *)[self.scroller viewWithTag:i+100];
+                        [UIView animateWithDuration:1.0 animations:^{
+                            [tempView setFrame:CGRectMake(tempView.frame.origin.x, [topLine floatValue]+100, tempView.frame.size.width, tempView.frame.size.height)];
+                        } completion:^(BOOL finshed){
+                        }];
+                    }
+                    
+                    if(top < [bottomLine floatValue]-10 && top > [topLine floatValue]){
+                        UIView *tempView = (UIView *)[self.scroller viewWithTag:i+100];
+                        [UIView animateWithDuration:0.3 animations:^{
+                            [tempView setFrame:CGRectMake(tempView.frame.origin.x, [topLine floatValue], tempView.frame.size.width, tempView.frame.size.height)];
+                        } completion:^(BOOL finshed){
+                        }];
+                    }
+                    
+                }
+            }
+//        }
+        
+        
+        currentScrollerY = y;
+	}
 }
 
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView {
-//    CGPoint offset = aScrollView.contentOffset;
-//	CGRect bounds = aScrollView.bounds;
-//	UIEdgeInsets inset = aScrollView.contentInset;
-//	float y = offset.y + bounds.size.height - inset.bottom;
-//    [self scrollTopTopos:y-518.0];
-//    NSLog(@"scrollViewDidEndDecelerating  -   End of Scrolling.");
-//}
-//// 触摸屏幕并拖拽画面，再松开，最后停止时，触发该函数
-//- (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView willDecelerate:(BOOL)decelerate {
-//    CGPoint offset = aScrollView.contentOffset;
-//	CGRect bounds = aScrollView.bounds;
-//	UIEdgeInsets inset = aScrollView.contentInset;
-//	float y = offset.y + bounds.size.height - inset.bottom;
-//    [self scrollTopTopos:y-518.0];
-//    NSLog(@"scrollViewDidEndDragging  -  End of Scrolling.");
-//}
 
+-(void) scrollViewDidEndDragging:(UIScrollView *)aScrollView willDecelerate:(BOOL)decelerate{
+    
+    CGRect bounds = aScrollView.bounds;
+    CGPoint offset = aScrollView.contentOffset;
+	CGSize size = aScrollView.contentSize;
+	UIEdgeInsets inset = aScrollView.contentInset;
+	float y = offset.y + bounds.size.height - inset.bottom;
+    refreshFlag = 1;
+    float refreshLine = bounds.size.height - 60;
+    if(y < refreshLine){
+        [self.spinner startAnimating];
+        [self.sorryLabel setHidden:NO];
+        [UIView animateWithDuration:0.3 animations:^{
+            [aScrollView setFrame:CGRectMake(0, 70, 320, self.scroller.frame.size.height)];
+        } completion:^(BOOL finshed){
+            [UIView animateWithDuration:0.5 animations:^{
+                [self refreshView];
+                [self.spinner stopAnimating];
+                [self.sorryLabel setHidden:YES];
+
+            } completion:^(BOOL finshed){
+                    [UIView animateWithDuration:0.3 animations:^{
+                [aScrollView setFrame:CGRectMake(0, 30, 320, self.scroller.frame.size.height)];
+                    } completion:^(BOOL finshed){
+                        refreshFlag = 0;
+                }];
+            }];
+        }];
+    }
+    
+}
 
 
 -(void) putImage {
-    int sHeight = self.view.frame.size.height;
-    if(self.imageWrap5.frame.origin.y > sHeight){
-        [self.imageWrap5 setFrame:CGRectMake(3, 1000, 320, 140)];
+    int sHeight = self.scroller.frame.size.height;
+    for(int i = 100;i < [[Mydata sharedSingleton].foodViewArray count]+100 ; i++){
+        UIView *tempView = (UIView *)[self.scroller viewWithTag:i];
+        if(tempView.frame.origin.y >sHeight){
+            [tempView setFrame:CGRectMake(tempView.frame.origin.x, tempView.frame.origin.y+100.0, tempView.frame.size.width, tempView.frame.size.height)];
+        }
+        
     }
-    if(self.imageWrap4.frame.origin.y > sHeight){
-        [self.imageWrap4 setFrame:CGRectMake(3, 867, 320, 130)];
-    }
-
+    
 }
 
--(void) moveBlowImage:(float)y{
-    //down
 
-    if(y > 639 && der == 1){
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.imageWrap4 setFrame:CGRectMake(3, 645, 320, 130)];
-        } completion:^(BOOL finshed){
-        }];
-    }
-    if(y > 772 && der == 1){
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.imageWrap5 setFrame:CGRectMake(3, 778, 320, 140)];
-        } completion:^(BOOL finshed){
-        }];
-    }
-    //up
+-(void) initDataArray{
 
-    if(y < 639 && der == 0){
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.imageWrap4 setFrame:CGRectMake(3, 867, 320, 130)];
-        } completion:^(BOOL finshed){
-        }];
-    }
-    if(y < 772 && der == 0){
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.imageWrap5 setFrame:CGRectMake(3, 1000, 320, 140)];
-        } completion:^(BOOL finshed){
-        }];
-    }
+    NSLog(@"%d",[[Mydata sharedSingleton].foodViewArray count]);
+    
+    //第一步，创建URL
+    NSURL *url = [NSURL URLWithString:@"http://ll.is.tokushima-u.ac.jp/Nepre/GetPhoto"];
+    
+    //第二步，通过URL创建网络请求
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    //NSURLRequest初始化方法第一个参数：请求访问路径，第二个参数：缓存协议，第三个参数：网络请求超时时间（秒）
 
+    //第三步，连接服务器
+    self.recieveData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
+    NSString *receiveStr = [[NSString alloc]initWithData:self.recieveData encoding:NSUTF8StringEncoding];
+    NSData* jsonData = [receiveStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableArray *result = [[NSMutableArray alloc]initWithArray:[jsonData objectFromJSONData]];
+    [Mydata sharedSingleton].foodViewArray = [[NSMutableArray alloc]initWithArray:result];
 }
 
--(void) moveAboveImage:(float)y{
-    float top = y - self.view.frame.size.height;
-    if(top > 260 && der == 1){
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.imageWrap0 setFrame:CGRectMake(3, -137, 320, 260)];
-        } completion:^(BOOL finshed){
-        }];
+-(void)refreshView{
+    
+    for(int i = 0 ;i<[[Mydata sharedSingleton].foodViewArray count];i++){
+        UIView *removeView = (UIView*)[self.scroller viewWithTag:100+i];
+        [removeView removeFromSuperview];
     }
-    if(top < 260 && der == 0){
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.imageWrap0 setFrame:CGRectMake(3, 3, 320, 260)];
-        } completion:^(BOOL finshed){
-        }];
+  
+    [[Mydata sharedSingleton].foodViewArray removeAllObjects];
+    [self initDataArray];
+    
+    [position1 removeAllObjects];
+    [position2 removeAllObjects];
+    animat = 0;//不是动画
+    
+    NSMutableArray *imageArray = [[NSMutableArray alloc]init];
+    int imageViewY = 1;
+    int imageTagNum = 0;
+    for(int i = 0;i<[Mydata sharedSingleton].foodViewArray.count;i++){
+        NSDictionary *jsonImage = [[Mydata sharedSingleton].foodViewArray objectAtIndex:i];
+        NSArray *imageViewnameArray = [jsonImage valueForKey:@"name"];
+        NSArray *imageViewheightArray = [jsonImage valueForKey:@"height"];
+        NSArray *imageViewwidthArray = [jsonImage valueForKey:@"width"];
+        NSArray *imageViewidArray = [jsonImage valueForKey:@"id"];
+        
+        //make a image wrap view
+        UIView *homeView = [[UIView alloc]initWithFrame:CGRectMake(2, imageViewY, 320, [imageViewheightArray[0] floatValue])];
+        [homeView setBackgroundColor:[UIColor blackColor]];
+        homeView.tag = i+100;
+        [self.scroller addSubview:homeView];
+        
+        
+        
+        //paste imageView
+        int imageButtonX = 0;
+        for(int j = 0 ; j<imageViewnameArray.count ; j++){
+            NSString *homeImageFileName = [NSString stringWithFormat:@"%@",imageViewnameArray[j]];
+            UIButton *homeImageView = [[UIButton alloc]initWithFrame:CGRectMake(imageButtonX, 0, [imageViewwidthArray[j] floatValue], [imageViewheightArray[j] floatValue])];
+            [homeImageView setImage:[UIImage imageNamed:homeImageFileName] forState:UIControlStateNormal];
+            imageButtonX = imageButtonX + [imageViewwidthArray[j] floatValue];
+            imageButtonX = imageButtonX +2;
+            homeImageView.tag = imageTagNum;
+            imageTagNum++;
+            [homeImageView addTarget:self action:@selector(pushButton:) forControlEvents:UIControlEventTouchUpInside];
+            [homeView addSubview:homeImageView];
+            
+            //went people
+            int wentPersonX = 5;
+            float wentY = [imageViewheightArray[j] floatValue];
+            wentY = wentY - 45.0;
+            
+            if( [imageViewnameArray count] == 1){
+                int value = (arc4random() % 4) + 1;
+                int value2 = (arc4random() % 4) + 5;
+                int value3 = (arc4random() % 4) + 9;
+                int randomNum[] = {value,value2,value3};
+                for(int j = 0;j<3;j++){
+                    UIImageView *wentperson = [[UIImageView alloc]initWithFrame:CGRectMake(wentPersonX, wentY, 35, 35)];
+                    
+                    NSString *wentPersonIconFileName = [NSString stringWithFormat:@"_icon_-%d",randomNum[j]];
+                    wentperson.image = [UIImage imageNamed:wentPersonIconFileName];
+                    wentPersonX = wentPersonX + 40;
+                    [homeImageView addSubview:wentperson];
+                }
+            }
+            
+            //went num
+            UIView *wentNumView = [[UIView alloc]initWithFrame:CGRectMake(wentPersonX, wentY, 35, 35)];
+            [wentNumView setAlpha:0.75];
+            [wentNumView setBackgroundColor:[UIColor redColor]];
+            UILabel *wentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+            wentNumLabel.text = @"+8";
+            wentNumLabel.textColor= [UIColor whiteColor];
+            wentNumLabel.textAlignment = UITextAlignmentCenter;
+            [wentNumLabel setBackgroundColor:[UIColor clearColor]];
+            [wentNumView addSubview:wentNumLabel];
+            [homeImageView addSubview:wentNumView];
+            
+            //likeImageview
+            float likeX = [imageViewwidthArray[j] floatValue];
+            UIImageView *likeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(likeX-50, wentY-3, 40, 40)];
+            likeImageView.image = [UIImage imageNamed:@"icon-09"];
+            UILabel *numLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
+            numLabel.backgroundColor = [UIColor clearColor];
+            numLabel.text = [NSString stringWithFormat:@"%d",i];
+            [numLabel setTextAlignment:UITextAlignmentCenter];
+            numLabel.textColor = [UIColor whiteColor];
+            [likeImageView addSubview:numLabel];
+            [homeImageView addSubview:likeImageView];
+            
+        }
+        imageViewY = imageViewY + [imageViewheightArray[0] floatValue];
+        imageViewY = imageViewY +2;
+        //huwahuwa initail2
+        [position1 addObject:[NSNumber numberWithFloat:homeView.frame.origin.y]];
+        float bottom = homeView.frame.origin.y+homeView.frame.size.height;
+        [position2 addObject:[NSNumber numberWithFloat:bottom]];
     }
-    if(top > 363 && der == 1){
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.imageWrap1 setFrame:CGRectMake(3, -37, 320, 100)];
-        } completion:^(BOOL finshed){
-        }];
-    }
-    if(top < 363 && der == 0){
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.imageWrap1 setFrame:CGRectMake(3, 266, 320, 100)];
-        } completion:^(BOOL finshed){
-        }];
-    }
+    
+    
+    [self.scroller setContentSize:CGSizeMake(320, imageViewY)];
+}
+
+-(void) goProfile:(id)sender{
+    UIButton *button = (UIButton*)sender;
+    NSLog(@"%d    %@",button.tag,[[Mydata sharedSingleton].userList objectAtIndex:button.tag]);
+    [Mydata sharedSingleton].nowGoProfile = [[Mydata sharedSingleton].userList objectAtIndex:button.tag];
+    ProfileViewController *pvc = [[ProfileViewController alloc]init];
+    [self.navigationController pushViewController:pvc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

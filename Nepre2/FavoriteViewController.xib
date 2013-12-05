@@ -45,7 +45,7 @@
 							<object class="IBUIButton" id="707333763">
 								<reference key="NSNextResponder" ref="197983546"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{7, 5}, {20, 20}}</string>
+								<string key="NSFrame">{{6, 2}, {26, 26}}</string>
 								<reference key="NSSuperview" ref="197983546"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="835343228"/>
@@ -95,7 +95,7 @@
 					<object class="IBUIScrollView" id="1034467040">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 190}, {320, 358}}</string>
+						<string key="NSFrame">{{0, 185}, {320, 363}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -120,7 +120,6 @@
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
-								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUINormalTitle">96</string>
 								<reference key="IBUIHighlightedTitleColor" ref="437208830"/>
 								<object class="NSColor" key="IBUINormalTitleColor" id="228324187">
@@ -147,14 +146,13 @@
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
-								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUINormalTitle">126</string>
 								<reference key="IBUIHighlightedTitleColor" ref="437208830"/>
 								<reference key="IBUINormalTitleColor" ref="228324187"/>
 								<reference key="IBUINormalTitleShadowColor" ref="825316031"/>
 								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">folllow.png</string>
+									<string key="NSResourceName">follow.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="16518352"/>
 								<reference key="IBUIFont" ref="720587249"/>
@@ -162,7 +160,7 @@
 							<object class="IBUIButton" id="93437661">
 								<reference key="NSNextResponder" ref="954062048"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{107, 38}, {104, 40}}</string>
+								<string key="NSFrame">{{107, 38}, {104, 35}}</string>
 								<reference key="NSSuperview" ref="954062048"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="605761715"/>
@@ -280,10 +278,6 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">_icon-04.png</string>
-								</object>
 							</object>
 						</array>
 						<string key="NSFrame">{{0, 30}, {320, 80}}</string>
@@ -388,6 +382,41 @@
 						<reference key="destination" ref="954062048"/>
 					</object>
 					<int key="connectionID">134</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">profileAvatar</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="54385781"/>
+					</object>
+					<int key="connectionID">137</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">goFollow:</string>
+						<reference key="source" ref="840855669"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">136</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">goFollow:</string>
+						<reference key="source" ref="740391673"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">135</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">goWent:</string>
+						<reference key="source" ref="605761715"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">138</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -544,18 +573,38 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">134</int>
+			<int key="maxID">138</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">FavoriteViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="goFollow:">id</string>
+						<string key="goProfile:">id</string>
+						<string key="goWent:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="goFollow:">
+							<string key="name">goFollow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="goProfile:">
+							<string key="name">goProfile:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="goWent:">
+							<string key="name">goWent:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="iconView">UIView</string>
 						<string key="menuButton">UIButton</string>
 						<string key="menuView">UIView</string>
 						<string key="myNavibar">UIView</string>
+						<string key="profileAvatar">UIImageView</string>
 						<string key="scroller">UIScrollView</string>
 						<string key="slideView">UIView</string>
 					</dictionary>
@@ -575,6 +624,10 @@
 						<object class="IBToOneOutletInfo" key="myNavibar">
 							<string key="name">myNavibar</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="profileAvatar">
+							<string key="name">profileAvatar</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="scroller">
 							<string key="name">scroller</string>
@@ -597,13 +650,12 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="_icon-04.png">{100, 100}</string>
-			<string key="all_off.png">{112, 30}</string>
-			<string key="favorite_on.png">{112, 34}</string>
-			<string key="folllow.png">{158, 27}</string>
-			<string key="follower.png">{158, 27}</string>
+			<string key="all_off.png">{112, 35}</string>
+			<string key="favorite_on.png">{112, 35}</string>
+			<string key="follow.png">{169, 30}</string>
+			<string key="follower.png">{169, 30}</string>
 			<string key="menuLine.png">{100, 100}</string>
-			<string key="went_off.png">{112, 30}</string>
+			<string key="went_off.png">{112, 35}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

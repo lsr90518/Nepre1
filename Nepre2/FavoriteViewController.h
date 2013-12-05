@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ZUUIRevealController.h"
+#import "Mydata.h"
 
-@interface FavoriteViewController : UIViewController<UIScrollViewDelegate>{
+@interface FavoriteViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>{
     int sideFlag;
     float cellHeight;
     int currentScrollerY;
@@ -18,8 +19,15 @@
     NSMutableArray *position2;
     int animat;
     int scrolling;
+    UITableView *followTable;
+    UITableView *followerTable;
+    int tableClick;
+    UIView *backBlackview;
+    
 }
 
 @property NSArray *items;
+@property (weak, nonatomic) IBOutlet UIImageView *profileAvatar;
+@property (strong, nonatomic) NSMutableData *recieveData;
 
 @end

@@ -7,12 +7,15 @@
 //
 
 #import "RevealController.h"
+#import "AppDelegate.h"
 
 @interface RevealController ()
 
 @end
 
 @implementation RevealController
+
+@synthesize foodViewArray = _foodViewArray;
 
 #pragma mark - Initialization
 
@@ -25,6 +28,15 @@
 	{
 		self.delegate = self;
 	}
+    
+    touchbutton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+    [touchbutton setBackgroundColor:[UIColor clearColor]];
+    [touchbutton addTarget:self.navigationController.parentViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:touchbutton];
+    
+    self.foodViewArray = [[NSMutableArray alloc]initWithCapacity:10];
+    NSString *temp = @"test";
+    [self.foodViewArray addObject:temp];
 	
 	return self;
 }
@@ -51,6 +63,7 @@
 
 - (void)revealController:(ZUUIRevealController *)revealController didRevealRearViewController:(UIViewController *)rearViewController
 {
+    [touchbutton setFrame:CGRectMake(60, 30, 320, 518)];
 	NSLog(@"%@", NSStringFromSelector(_cmd));
 }
 
@@ -61,6 +74,7 @@
 
 - (void)revealController:(ZUUIRevealController *)revealController didHideRearViewController:(UIViewController *)rearViewController
 {
+    [touchbutton setFrame:CGRectMake(0, 0, 0, 0)];
 	NSLog(@"%@", NSStringFromSelector(_cmd));
 }
 
@@ -71,9 +85,6 @@
 	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
--(void) scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@"2");
-}
 
 
 @end

@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PlaceViewController : UIViewController{
+@interface PlaceViewController : UIViewController<UIScrollViewDelegate>{
     int sideFlag;
+    int currentScrollerY;
+    int der;
+    float cellHeight;
+    NSMutableArray *position1;
+    NSMutableArray *position2;
+    int animat;
+    int scrolling;
+    int refreshFlag;
 }
+
+@property (strong, nonatomic) NSMutableData *recieveData;
 
 @end

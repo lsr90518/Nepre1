@@ -7,6 +7,7 @@
 //
 
 #import "SidebarViewController.h"
+#import "Mydata.h"
 
 @interface SidebarViewController ()
 
@@ -49,6 +50,9 @@
     
     
     if(![revealController.frontViewController isKindOfClass:[ProfileViewController class]]){
+        
+        [Mydata sharedSingleton].nowGoProfile = [[Mydata sharedSingleton].userList objectAtIndex:5];
+        
         ProfileViewController *foodViewController = [[ProfileViewController alloc]init];
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:foodViewController];

@@ -10,8 +10,13 @@
 #import "FoodViewController.h"
 #import "SidebarViewController.h"
 #import "ViewController.h"
+#import "Mydata.h"
 
 @implementation AppDelegate
+
+@synthesize window =_window;
+@synthesize viewController = _viewController;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -26,8 +31,7 @@
 	self.viewController = revealController;
     
 
-    [self initDataArray];
-
+    [self initData];
     
     self.window.rootViewController = self.viewController;
 	[self.window makeKeyAndVisible];
@@ -35,18 +39,30 @@
     return YES;
 }
 
--(void) initDataArray{
-    initArray = [[NSMutableArray alloc]init];
+-(void) initData {
+    ///////////////////////////////
+    [Mydata sharedSingleton].imageViewheightArray = [[NSMutableArray alloc]init];
+    [Mydata sharedSingleton].imageViewnameArray = [[NSMutableArray alloc]init];
+    [Mydata sharedSingleton].imageViewwidthArray = [[NSMutableArray alloc]init];
+    [Mydata sharedSingleton].imageViewidArray = [[NSMutableArray alloc]init];
+    [Mydata sharedSingleton].imageViewlatArray = [[NSMutableArray alloc]init];
+    [Mydata sharedSingleton].imageViewlngArray = [[NSMutableArray alloc]init];
     
-    for(int i = 1;i<21;i++){
-        NSString *spotFileName = [NSString stringWithFormat:@"%d",i];
-        NSString *foodFileName = [NSString stringWithFormat:@"f%d",i];
-        
-//        [initArray addObject:spotFileName];
-//        [initArray addObject:foodFileName];
-        
+    [Mydata sharedSingleton].followerList = [[NSMutableArray alloc] init];
+    [Mydata sharedSingleton].followList = [[NSMutableArray alloc] init];
+
+    
+    [Mydata sharedSingleton].userList = [[NSMutableArray alloc]init];
+    for(int i = 0;i< 15;i++){
+        NSString *userimage = [NSString stringWithFormat:@"_icon_-%d",i];
+        [[Mydata sharedSingleton].userList addObject:userimage];
+        NSNumber *friend = [[NSNumber alloc]initWithInt:0];
+        NSNumber *unFriend = [[NSNumber alloc]initWithInt:1];
+        [[Mydata sharedSingleton].followerList addObject:friend];
+        [[Mydata sharedSingleton].followList addObject:unFriend];
     }
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -74,5 +90,7 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
 
 @end

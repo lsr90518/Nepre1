@@ -12,6 +12,10 @@
 @class FoodViewController;
 @class SidebarViewController;
 
-@interface RevealController : ZUUIRevealController <ZUUIRevealControllerDelegate,UIScrollViewDelegate>
+@interface RevealController : ZUUIRevealController <ZUUIRevealControllerDelegate>{
+    UIButton *touchbutton;
+}
+
+@property (retain, nonatomic) NSMutableArray *foodViewArray;
 
 @end

@@ -25,9 +25,5 @@
 
     // Configure the view for the selected state
 }
-- (IBAction)answer:(id)sender {
-    UIButton *button = (UIButton *)sender;
-    NSLog(@"%d",button.tag);
-}
 
 @end

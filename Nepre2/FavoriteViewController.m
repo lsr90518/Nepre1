@@ -9,15 +9,17 @@
 #import "FavoriteViewController.h"
 #import "ProfileViewController.h"
 #import "FavoriteCell.h"
+#import "WentViewController.h"
+#import "FollowCell.h"
 
 @interface FavoriteViewController ()
-@property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
-@property (retain, nonatomic) IBOutlet UIButton *menuButton;
-@property (retain, nonatomic) IBOutlet UIView *slideView;
-@property (retain, nonatomic) IBOutlet UIScrollView *scroller;
-@property (retain, nonatomic) IBOutlet UIView *myNavibar;
-@property (retain, nonatomic) IBOutlet UIView *iconView;
-@property (retain, nonatomic) IBOutlet UIView *menuView;
+@property (weak, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
+@property (weak, nonatomic) IBOutlet UIButton *menuButton;
+@property (weak, nonatomic) IBOutlet UIView *slideView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
+@property (weak, nonatomic) IBOutlet UIView *myNavibar;
+@property (weak, nonatomic) IBOutlet UIView *iconView;
+@property (weak, nonatomic) IBOutlet UIView *menuView;
 
 
 @end
@@ -63,6 +65,10 @@
 //    self.favoriteTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.navigationController.navigationBar.hidden = YES;
+    
+    //set avatar image
+    NSLog(@"%@",[Mydata sharedSingleton].nowGoProfile);
+    self.profileAvatar.image = [UIImage imageNamed:[Mydata sharedSingleton].nowGoProfile ];
     
     position1 = [[NSMutableArray alloc]init];
     position2 = [[NSMutableArray alloc]init];
@@ -125,10 +131,17 @@
         int wentPersonX = 5;
         float wentY;
         for(int j = 0;j<3;j++){
+            int value = (arc4random() % 4) + 1;
+            int value2 = (arc4random() % 4) + 5;
+            int value3 = (arc4random() % 4) + 9;
+            int randomNum[] = {value,value2,value3};
             wentY = cellHeight-45.0;
-            UIImageView *wentperson = [[UIImageView alloc]initWithFrame:CGRectMake(wentPersonX, wentY, 35, 35)];
-            NSString *wentPersonIconFileName = [NSString stringWithFormat:@"_icon-0%d",j+1];
-            wentperson.image = [UIImage imageNamed:wentPersonIconFileName];
+            UIButton *wentperson = [[UIButton alloc]initWithFrame:CGRectMake(wentPersonX, wentY, 35, 35)];
+            NSString *wentPersonIconFileName = [NSString stringWithFormat:@"_icon_-%d",randomNum[j]];
+            NSLog(@"%@",wentPersonIconFileName);
+            wentperson.tag = randomNum[j]+300;
+            [wentperson setImage:[UIImage imageNamed:wentPersonIconFileName] forState:UIControlStateNormal];
+            [wentperson addTarget:self action:@selector(goFriend:) forControlEvents:UIControlEventTouchUpInside];
             wentPersonX = wentPersonX + 40;
             [wentperson setAlpha:0.75];
             [detailView addSubview:wentperson];
@@ -148,8 +161,12 @@
         
         //author button
         UIButton *authorButton = [[UIButton alloc]initWithFrame:CGRectMake(5, 5, 50, 50)];
-        UIImage *authorImage = [UIImage imageNamed:@"_icon-07"];
+        int value = (arc4random() %14)+1;
+        NSString *authorImageFileName = [NSString stringWithFormat:@"_icon_-%d",value];
+        authorButton.tag = value+300;
+        UIImage *authorImage = [UIImage imageNamed:authorImageFileName];
         [authorButton setImage:authorImage forState:UIControlStateNormal];
+        [authorButton addTarget:self action:@selector(goFriend:) forControlEvents:UIControlEventTouchUpInside];
         authorButton.alpha=0.75;
         [detailImageview addSubview:authorButton];
         
@@ -178,7 +195,30 @@
     }
     [self.scroller setContentSize:CGSizeMake(320, inity)];
     [self.scroller setDelegate:self];
-//    [self putImage];
+    [self putImage];
+    
+    //make follow table
+    
+    backBlackview = [[UIView alloc]initWithFrame:CGRectMake(0, 148, 320, 0)];
+    [backBlackview setBackgroundColor:[UIColor blackColor]];
+    [self.view addSubview:backBlackview];
+    
+    followTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 148, 158, 0) style:UITableViewStylePlain];
+    followerTable = [[UITableView alloc]initWithFrame:CGRectMake(162, 148, 158, 0) style:UITableViewStylePlain];
+    
+    followerTable.delegate = self;
+    followTable.delegate = self;
+    followerTable.dataSource = self;
+    followTable.dataSource = self;
+    followTable.tag = 100;
+    followerTable.tag = 101;
+    [followTable setBackgroundColor:[UIColor blackColor]];
+    [followerTable setBackgroundColor:[UIColor blackColor]];
+    [followTable setSeparatorColor:[UIColor blackColor]];
+    [followerTable setSeparatorColor:[UIColor blackColor]];
+    
+    [self.view addSubview:followTable];
+    [self.view addSubview:followerTable];
     
 }
 
@@ -256,7 +296,7 @@
                         [self.myNavibar setFrame:CGRectMake(0, 0, 320, 30)];
                         [self.iconView setFrame:CGRectMake(0, 30, 320, 80)];
                         [self.menuView setFrame:CGRectMake(0, 110, 320, 78)];
-                        [self.scroller setFrame:CGRectMake(0, 190, 320, 358)];
+                        [self.scroller setFrame:CGRectMake(0, 185, 320, 363)];
                     } completion:^(BOOL finshed){
                         animat = 0;
                     }];
@@ -318,12 +358,163 @@
     }
 }
 
+//table source
+#pragma mark -
+#pragma mark Table view data source
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+    if(tableView.tag == 0){
+        return 1;
+    } else {
+        return 1;
+    }
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(tableView.tag == 100){
+        return 8;
+    } else if(tableView.tag == 101) {
+        return 8;
+    }
+}
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"FollowCell";
+    
+    FollowCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+    
+    cell = (FollowCell*)[nibArray objectAtIndex:0];
+    
+    if(tableView.tag == 300){
+        NSString *avatarName = [NSString stringWithFormat:@"_icon_-%d",indexPath.row+1];
+        [cell.avatarIcon setImage:[UIImage imageNamed:avatarName] forState:UIControlStateNormal];
+        [cell.avatarIcon addTarget:self action:@selector(goProfile:) forControlEvents:UIControlEventTouchUpInside];
+        cell.avatarIcon.tag = indexPath.row+1;
+        [cell.followButton setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+        [cell.followButton addTarget:self action:@selector(changeCheck:) forControlEvents:UIControlEventTouchUpInside];
+        cell.followButton.tag = indexPath.row+100;
+    } else {
+        NSString *avatarName = [NSString stringWithFormat:@"_icon_-%d",14-indexPath.row];
+        [cell.avatarIcon setImage:[UIImage imageNamed:avatarName] forState:UIControlStateNormal];
+        [cell.avatarIcon addTarget:self action:@selector(goProfile:) forControlEvents:UIControlEventTouchUpInside];
+        cell.avatarIcon.tag = 14-indexPath.row;
+        [cell.followButton setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+        [cell.followButton addTarget:self action:@selector(changeCheck:) forControlEvents:UIControlEventTouchUpInside];
+        cell.followButton.tag = indexPath.row+200;
+    }
+    if (cell == nil) {
+        cell = [[FollowCell alloc]init];
+        
+    }
+    
+    
+    return cell;
+}
+
+-(void) changeCheck:(UIButton*)sender{
+    UIButton *button = sender;
+    if(button.tag>199){
+        //follower
+        int newtag = button.tag-200;
+        if([[[Mydata sharedSingleton].followerList objectAtIndex:newtag] intValue] == 0){
+            [button setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+            NSNumber *friend = [[NSNumber alloc]initWithInt:1];
+            [[Mydata sharedSingleton].followerList replaceObjectAtIndex:newtag withObject:friend];
+        } else {
+            [button setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+            NSNumber *friend = [[NSNumber alloc]initWithInt:0];
+            [[Mydata sharedSingleton].followerList replaceObjectAtIndex:newtag withObject:friend];
+        }
+    } else {
+        int newtag = button.tag-100;
+        
+        if([[[Mydata sharedSingleton].followList objectAtIndex:newtag] intValue] == 0){
+            [button setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+            NSNumber *friend = [[NSNumber alloc]initWithInt:1];
+            [[Mydata sharedSingleton].followList replaceObjectAtIndex:newtag withObject:friend];
+        } else {
+            [button setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+            NSNumber *friend = [[NSNumber alloc]initWithInt:0];
+            [[Mydata sharedSingleton].followList replaceObjectAtIndex:newtag withObject:friend];
+        }
+    }
+}
+
+//select
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"%d       %d",tableView.tag,indexPath.row);
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIColor *FollowColor = [UIColor colorWithRed:32.0/255.0 green:37.0/255.0 blue:37.0/255.0 alpha:1.0];
+    UIColor *FollowerColor = [UIColor colorWithRed:49.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if (tableView.tag == 300) {
+        cell.backgroundColor = FollowColor;
+    }
+    else if(tableView.tag == 301) {
+        cell.backgroundColor = FollowerColor;
+    }
+}
+
+-(float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 35;
+}
+
+- (IBAction)goFollow:(id)sender {
+    //    FollowViewController *follow = [[FollowViewController alloc]init];
+    //
+    //    [self.navigationController pushViewController:follow animated:NO];
+    if(tableClick == 0){
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView animateWithDuration:0.3 animations:^{
+            [followTable setFrame:CGRectMake(0, 148, 158, 408)];
+            [followerTable setFrame:CGRectMake(162, 148, 158, 408)];
+            [backBlackview setFrame:CGRectMake(0, 148, 320, 408)];
+        } completion:^(BOOL finshed){
+            tableClick = 1;
+        }];
+    } else {
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView animateWithDuration:0.3 animations:^{
+            [followTable setFrame:CGRectMake(0, 148, 158, 0)];
+            [followerTable setFrame:CGRectMake(162, 148, 158, 0)];
+            [backBlackview setFrame:CGRectMake(0, 148, 320, 0)];
+        } completion:^(BOOL finshed){
+            tableClick = 0;
+        }];
+    }
+    
+}
+
+- (IBAction)goWent:(id)sender {
+    [self.scroller removeFromSuperview];
+    WentViewController *wvc = [[WentViewController alloc]init];
+    
+    [self.navigationController pushViewController:wvc animated:NO];
+}
 
 - (IBAction)goProfile:(id)sender {
+    
+    [self.scroller removeFromSuperview];
     ProfileViewController *p = [[ProfileViewController alloc]init];
     
     [self.navigationController pushViewController:p animated:NO];
 }
+
+-(void) goFriend:(id)sender{
+    UIButton *button = (UIButton*)sender;
+    NSLog(@"%d    %@",button.tag,[[Mydata sharedSingleton].userList objectAtIndex:button.tag-300]);
+    [Mydata sharedSingleton].nowGoProfile = [[Mydata sharedSingleton].userList objectAtIndex:button.tag-300];
+    [self.scroller removeFromSuperview];
+    ProfileViewController *pvc = [[ProfileViewController alloc]init];
+    [self.navigationController pushViewController:pvc animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

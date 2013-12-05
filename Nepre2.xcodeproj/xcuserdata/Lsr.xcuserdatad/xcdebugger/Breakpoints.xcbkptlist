@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Nepre2/FavoriteViewController.m"
-         timestampString = "407737022.515926"
+         timestampString = "407903546.435384"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "205"
-         endingLineNumber = "205"
+         startingLineNumber = "245"
+         endingLineNumber = "245"
          landmarkName = "-scrollViewDidScroll:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Nepre2/FavoriteViewController.m"
-         timestampString = "407737022.515926"
+         timestampString = "407903546.435384"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "175"
-         endingLineNumber = "175"
+         startingLineNumber = "192"
+         endingLineNumber = "192"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Nepre2/FoodLocationViewController.m"
-         timestampString = "407756099.571315"
+         timestampString = "407770819.267872"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "262"
-         endingLineNumber = "262"
+         startingLineNumber = "265"
+         endingLineNumber = "265"
          landmarkName = "-drawRoute"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Nepre2/FoodLocationViewController.m"
-         timestampString = "407756099.571315"
+         timestampString = "407770819.267872"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "200"
-         endingLineNumber = "200"
+         startingLineNumber = "203"
+         endingLineNumber = "203"
          landmarkName = "-getRoutePointFrom:to:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Nepre2/FoodLocationViewController.m"
-         timestampString = "407756099.571315"
+         timestampString = "407770819.267872"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "221"
-         endingLineNumber = "221"
+         startingLineNumber = "224"
+         endingLineNumber = "224"
          landmarkName = "-decodePolyLine:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Nepre2/FoodLocationViewController.m"
-         timestampString = "407756099.571315"
+         timestampString = "407770819.267872"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "272"
-         endingLineNumber = "272"
+         startingLineNumber = "275"
+         endingLineNumber = "275"
          landmarkName = "-drawRoute"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,12 +86,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Nepre2/FoodLocationViewController.m"
-         timestampString = "407756099.571315"
+         timestampString = "407770819.267872"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "209"
-         endingLineNumber = "209"
+         startingLineNumber = "212"
+         endingLineNumber = "212"
          landmarkName = "-getRoutePointFrom:to:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Nepre2/FoodViewController.m"
+         timestampString = "407915049.878834"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "184"
+         endingLineNumber = "184"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Nepre2/FoodViewController.m"
+         timestampString = "407918482.84627"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "580"
+         endingLineNumber = "580"
+         landmarkName = "-goProfile:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Nepre2/ProfileViewController.m"
+         timestampString = "407923399.34107"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "300"
+         endingLineNumber = "300"
+         landmarkName = "-changeCheck:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

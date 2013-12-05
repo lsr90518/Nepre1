@@ -10,12 +10,13 @@
 #import "ProfileViewController.h"
 #import "FavoriteViewController.h"
 #import "FollowCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface FollowViewController ()
 
-@property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
-@property (retain, nonatomic) IBOutlet UIButton *menuButton;
-@property (retain, nonatomic) IBOutlet UIView *slideView;
+@property (weak, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
+@property (weak, nonatomic) IBOutlet UIButton *menuButton;
+@property (weak, nonatomic) IBOutlet UIView *slideView;
 
 @end
 
@@ -91,14 +92,7 @@
 
     cell.followButton.tag = indexPath.row;
     
-    if(tableView.tag == 0){
-        NSString *avatarName = [NSString stringWithFormat:@"_icon-0%d",indexPath.row+1];
-        cell.avatarIcon.image = [UIImage imageNamed:avatarName];
-    } else {
-        NSString *avatarName = [NSString stringWithFormat:@"_icon-0%d",8-indexPath.row];
-        cell.avatarIcon.image = [UIImage imageNamed:avatarName];
-    }
-    if (cell == nil) {
+        if (cell == nil) {
         cell = [[FollowCell alloc]init];
 
     }
@@ -131,14 +125,19 @@
 }
 
 
-
 - (IBAction)goProfile:(id)sender {
     ProfileViewController *p = [[ProfileViewController alloc]init];
-    [self.navigationController pushViewController:p animated:NO];
-}
-- (IBAction)goFavorite:(id)sender {
-    FavoriteViewController *f = [[FavoriteViewController alloc]init];
-    [self.navigationController pushViewController:f animated:NO];
+    CATransition *animation = [CATransition animation];
+    animation.delegate = self;
+    animation.duration = 0.3;
+    animation.timingFunction = UIViewAnimationCurveEaseInOut;
+    animation.type = kCATransitionReveal;
+    //    animation.subtype = kCATransitionFromTop;
+    [[self.navigationController.view layer] addAnimation:animation forKey:@"animation"];
+    
+    [self.navigationController pushViewController:p animated:YES];
+    
+    [UIView commitAnimations];
 }
 
 - (void)didReceiveMemoryWarning

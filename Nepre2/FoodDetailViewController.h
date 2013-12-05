@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ZUUIRevealController.h"
+#import "JSONKit.h"
 
 @interface FoodDetailViewController : UIViewController<UIScrollViewDelegate>{
     int sideFlag;
@@ -18,6 +19,7 @@
     NSMutableArray *position2;
     int animat;
     int scrolling;
+    int initFlag;
 }
 @property NSArray *items;
 
