@@ -11,6 +11,7 @@
 #import "MKMapView+ZoomLevel.h"
 #import "FoodDetailViewController.h"
 #import "JSONKit.h"
+#import "Mydata.h"
 #import <MapKit/MKAnnotation.h>
 
 @interface FoodLocationViewController ()
@@ -41,6 +42,8 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
+    //连接服务器
+    [self initData];
     
     // If not, allocate one and add it.
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self.navigationController.parentViewController action:@selector(revealGesture:)];
@@ -59,10 +62,6 @@
     
     //fffffffffffffffffffffffffffffffffffffff
     
-    // Origin Location.
-    CLLocationCoordinate2D loc1;
-    loc1.latitude = 34.070351;
-    loc1.longitude = 134.554911;
 //    JPSThumbnail *origin2 = [[JPSThumbnail alloc] initWithTitle:@"loc1" subTitle:@"Home1" andCoordinate:loc1];
     
     
@@ -79,7 +78,7 @@
     origin.image = [UIImage imageNamed:@"f3.jpg"];
     origin.title = @"Parliament of Canada";
     origin.subtitle = @"Oh Canada!";
-    origin.coordinate = CLLocationCoordinate2DMake(34.070351,134.554911);
+    origin.coordinate = CLLocationCoordinate2DMake(currentLocation.latitude,currentLocation.longitude);
     origin.disclosureBlock = ^{ NSLog(@"selected Ottawa"); };
     //    [self.mapView addAnnotation:origin];
     
@@ -90,10 +89,9 @@
     //    Annotation *destination = [[Annotation alloc] initWithTitle:@"loc2" subTitle:@"Home2" andCoordinate:loc2];
     
     JPSThumbnail *destination = [[JPSThumbnail alloc] init];
-    destination.image = [UIImage imageNamed:@"f3.jpg"];
-    destination.title = @"Parliament of Canada";
-    destination.subtitle = @"Oh Canada!";
-    destination.coordinate = CLLocationCoordinate2DMake(34.070365,134.559553);
+    destination.image = [UIImage imageNamed:imageName];
+    destination.title = shopname;
+    destination.coordinate = CLLocationCoordinate2DMake(deLat,deLng);
     destination.disclosureBlock = ^{ NSLog(@"selected Ottawa"); };
     if(arrRoutePoints) // Remove all annotations
         [self.mapView removeAnnotations:[self.mapView annotations]];
@@ -109,10 +107,10 @@
     
     // Parliament of Canada
     JPSThumbnail *ottawa = [[JPSThumbnail alloc] init];
-    ottawa.image = [UIImage imageNamed:@"f3.jpg"];
-    ottawa.title = @"Parliament of Canada";
-    ottawa.subtitle = @"Oh Canada!";
-    ottawa.coordinate = CLLocationCoordinate2DMake(34.070351,134.554911);
+    ottawa.image = [UIImage imageNamed:imageName];
+    ottawa.title = shopname;
+    ottawa.subtitle = @"";
+    ottawa.coordinate = CLLocationCoordinate2DMake(deLat,deLng);
     ottawa.disclosureBlock = ^{
         [self beginNavigation];
         [self centerMap];
@@ -196,11 +194,9 @@
 {
 //    NSString* saddr = [NSString stringWithFormat:@"%f,%f", origin.coordinate.latitude, origin.coordinate.longitude];
 //    NSString* daddr = [NSString stringWithFormat:@"%f,%f", destination.coordinate.latitude, destination.coordinate.longitude];
-    NSString* saddr = [NSString stringWithFormat:@"34.070365,134.559553"];
-     NSString* daddr = [NSString stringWithFormat:@"34.070351,134.554911"];
     
     
-    NSString* apiUrlStr = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/directions/json?origin=%f,%f&destination=34.070351,134.554911&sensor=false",currentLocation.latitude,currentLocation.longitude];
+    NSString* apiUrlStr = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/directions/json?origin=%f,%f&destination=%f,%f&sensor=false",currentLocation.latitude,currentLocation.longitude,deLat,deLng];
     NSURL* apiUrl = [NSURL URLWithString:apiUrlStr];
     
     NSError *error;
@@ -286,7 +282,30 @@
     [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(currentLocation.latitude,currentLocation.longitude) zoomLevel:13 animated:YES];
 }
 
+-(void)initData{
+    
+    
+    NSString *urlStr1 = [NSString stringWithFormat:@"http://ll.is.tokushima-u.ac.jp/Nepre/GetLocationByNum?number=%@",[Mydata sharedSingleton].mapTag];
+    
+    //第一步，创建URL
+    NSURL *url = [NSURL URLWithString:urlStr1];
+    
+    //第二步，通过URL创建网络请求
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    //NSURLRequest初始化方法第一个参数：请求访问路径，第二个参数：缓存协议，第三个参数：网络请求超时时间（秒）
+    
+    //第三步，连接服务器
+    self.recieveData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
+    NSString *receiveStr = [[NSString alloc]initWithData:self.recieveData encoding:NSUTF8StringEncoding];
+    NSData* jsonData = [receiveStr dataUsingEncoding:NSUTF8StringEncoding];
 
+    NSDictionary *location = [jsonData objectFromJSONData];
+    deLat = [[location valueForKey:@"lat"] floatValue];
+    deLng = [[location valueForKey:@"lng"] floatValue];
+    shopname = [location valueForKey:@"ShopName"];
+    imageName = [location valueForKey:@"imageName"];
+}
 
 
 - (void)didReceiveMemoryWarning

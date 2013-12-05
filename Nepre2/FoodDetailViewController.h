@@ -22,6 +22,8 @@
     int initFlag;
 }
 @property NSArray *items;
+@property (strong, nonatomic) NSMutableData *recieveData;
+@property (retain, nonatomic) NSMutableArray *foodViewArray;
 
 
 @end

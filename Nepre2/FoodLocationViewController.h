@@ -19,6 +19,12 @@
     MKPolygon *objpolygon;
     MKPolyline *objPolyline;
     CLLocationCoordinate2D currentLocation;
+    float deLat;
+    float deLng;
+    NSString *shopname;
+    NSString *imageName;
 }
+
+@property (strong, nonatomic) NSMutableData *recieveData;
 
 @end

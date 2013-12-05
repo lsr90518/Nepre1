@@ -11,6 +11,7 @@
 #import "FoodDetailCell.h"
 #import "FoodLocationViewController.h"
 #import "Mydata.h"
+#import "JSONKit.h"
 
 @interface FoodDetailViewController ()
 
@@ -47,11 +48,17 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
+    //交换位置
+    int dtag = [[Mydata sharedSingleton].detailImageTag intValue];
+    
     //连服务器，获取数据
+//    [self initData];
     
 //    self.items = [[NSArray alloc]initWithObjects:@"1.jpg",@"2.jpg",@"3.jpg",@"4.jpg",@"5.jpg",@"6.jpg",@"7.jpg",@"8.jpg",@"9.jpg",@"10.jpg",@"11.jpg",@"12.jpg",@"13.jpg",@"14.jpg",@"15.jpg",@"16.jpg",@"17.jpg",@"18.jpg",@"19.jpg",@"20.jpg", nil];
     
     self.items = [[NSArray alloc]initWithArray:[Mydata sharedSingleton].imageViewnameArray];
+//    self.items = [[NSArray alloc]initWithArray:self.foodViewArray];
+    
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goFood)];
     
@@ -61,7 +68,12 @@
     int inity = 15;
     
     for(int i = 0;i<self.items.count;i++){
-    //make detail view
+        
+//        NSDictionary *item = [self.items[i] objectFromJSONString];
+//        NSString *imageName1 = [item valueForKey:@"name1"];
+//        NSString *imageName2 = [item valueForKey:@"name2"];
+//        NSString *imageName3 = [item valueForKey:@"name3"];
+        //make detail view
         NSString *imageFileName = [NSString stringWithFormat:@"%@",self.items[i]];
         UIImage *foodImage = [UIImage imageNamed:imageFileName];
         float imageWidth = foodImage.size.width;
@@ -72,6 +84,10 @@
     
         UIView *detailView = [[UIView alloc]initWithFrame:CGRectMake(0, inity, 320, newHeight)];
         UIScrollView *detailScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, newHeight)];
+        
+        
+        
+        //多张
         UIImageView *detailImageview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, newHeight)];
         detailImageview.image = foodImage;
         
@@ -85,10 +101,22 @@
         numLabel.textColor = [UIColor whiteColor];
         [likeImageView addSubview:numLabel];
         [detailImageview addSubview:likeImageView];
+
+        //author button
+        UIButton *authorButton = [[UIButton alloc]initWithFrame:CGRectMake(5, 5, 50, 50)];
+        int value = (arc4random() %14)+1;
+        NSString *authorImageFileName = [NSString stringWithFormat:@"_icon_-%d",value];
+        authorButton.tag = value+300;
+        UIImage *authorImage = [UIImage imageNamed:authorImageFileName];
+        [authorButton setImage:authorImage forState:UIControlStateNormal];
+        [authorButton addTarget:self action:@selector(goFriend:) forControlEvents:UIControlEventTouchUpInside];
+        authorButton.alpha=0.75;
+        [detailImageview addSubview:authorButton];
+
         
         
         //init scroller
-        [detailScroll setContentSize:CGSizeMake(1600, 0)];
+        [detailScroll setContentSize:CGSizeMake(960, 0)];
         [detailScroll setAlwaysBounceVertical:NO];
         [detailScroll addSubview:detailImageview];
         [detailScroll setBackgroundColor:[UIColor blackColor]];
@@ -105,23 +133,13 @@
             
             
             UIImageView *wentperson = [[UIImageView alloc]initWithFrame:CGRectMake(wentPersonX, wentY, 35, 35)];
-            NSString *wentPersonIconFileName = [NSString stringWithFormat:@"_icon-0%d",j+1];
+            NSString *wentPersonIconFileName = [NSString stringWithFormat:@"_icon_-%d",j+1];
             wentperson.image = [UIImage imageNamed:wentPersonIconFileName];
             wentPersonX = wentPersonX + 40;
             [detailView addSubview:wentperson];
         }
         
-        //went num
-        UIView *wentNumView = [[UIView alloc]initWithFrame:CGRectMake(wentPersonX, wentY, 35, 35)];
-        [wentNumView setAlpha:0.75];
-        [wentNumView setBackgroundColor:[UIColor redColor]];
-        UILabel *wentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
-        wentNumLabel.text = @"+8";
-        wentNumLabel.textColor= [UIColor whiteColor];
-        wentNumLabel.textAlignment = UITextAlignmentCenter;
-        [wentNumLabel setBackgroundColor:[UIColor clearColor]];
-        [wentNumView addSubview:wentNumLabel];
-        [detailView addSubview:wentNumView];
+        
         
         
         //map
@@ -181,6 +199,9 @@
 }
 
 -(void) goMap: (id)sender {
+    UIButton *button = (UIButton*)sender;
+    [Mydata sharedSingleton].mapTag = [[Mydata sharedSingleton].imageViewNumArray objectAtIndex:button.tag];
+    
     FoodLocationViewController *flvc = [[FoodLocationViewController alloc]init];
     [self.navigationController pushViewController:flvc animated:YES];
 }
@@ -319,6 +340,32 @@
 }
 //
 
+-(void) initData{
+    NSLog(@"%d",[[Mydata sharedSingleton].imageViewNumArray count]);
+    NSString * urlStr = [[NSString alloc]init];
+    urlStr = @"?idlist=";
+    for(int i = 0;i<[Mydata sharedSingleton].imageViewNumArray.count;i++){
+        urlStr = [urlStr stringByAppendingFormat:@"%@,", [[Mydata sharedSingleton].imageViewNumArray objectAtIndex:i]];
+    }
+    urlStr = [urlStr stringByAppendingFormat:@"&tag=%@",[Mydata sharedSingleton].detailImageTag];
+    
+    NSString *urlStr1 = [NSString stringWithFormat:@"http://ll.is.tokushima-u.ac.jp/Nepre/GetDetailByID%@",urlStr];
+    
+    //第一步，创建URL
+    NSURL *url = [NSURL URLWithString:urlStr1];
+    
+    //第二步，通过URL创建网络请求
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    //NSURLRequest初始化方法第一个参数：请求访问路径，第二个参数：缓存协议，第三个参数：网络请求超时时间（秒）
+    
+    //第三步，连接服务器
+    self.recieveData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
+    NSString *receiveStr = [[NSString alloc]initWithData:self.recieveData encoding:NSUTF8StringEncoding];
+    NSData* jsonData = [receiveStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableArray *result = [[NSMutableArray alloc]initWithArray:[jsonData objectFromJSONData]];
+    self.foodViewArray = [[NSMutableArray alloc]initWithArray:result];
+}
 
 - (void)didReceiveMemoryWarning
 {

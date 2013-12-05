@@ -18,7 +18,7 @@
 @property (retain, nonatomic) NSMutableArray *userList;
 @property (retain, nonatomic) NSMutableArray *usernameList;
 @property (retain, nonatomic) NSString *nowGoProfile;
-
+@property (retain, nonatomic) NSMutableArray *placeViewArray;
 @property (retain, nonatomic) NSString *detailLocation;
 
 @property (retain, nonatomic) NSMutableArray *imageViewnameArray;
@@ -27,9 +27,12 @@
 @property (retain, nonatomic) NSMutableArray *imageViewidArray;
 @property (retain, nonatomic) NSMutableArray *imageViewlatArray;
 @property (retain, nonatomic) NSMutableArray *imageViewlngArray;
+@property (retain, nonatomic) NSMutableArray *imageViewNumArray;
 
 @property (retain, nonatomic) NSMutableArray *followList;
 @property (retain, nonatomic) NSMutableArray *followerList;
 @property (retain, nonatomic) NSString *detailImageTag;
+
+@property (retain, nonatomic) NSString *mapTag;
 
 @end

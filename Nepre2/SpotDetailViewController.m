@@ -110,17 +110,7 @@
             [detailView addSubview:wentperson];
         }
         
-        //went num
-        UIView *wentNumView = [[UIView alloc]initWithFrame:CGRectMake(wentPersonX, wentY, 35, 35)];
-        [wentNumView setAlpha:0.75];
-        [wentNumView setBackgroundColor:[UIColor redColor]];
-        UILabel *wentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
-        wentNumLabel.text = @"+8";
-        wentNumLabel.textColor= [UIColor whiteColor];
-        wentNumLabel.textAlignment = UITextAlignmentCenter;
-        [wentNumLabel setBackgroundColor:[UIColor clearColor]];
-        [wentNumView addSubview:wentNumLabel];
-        [detailView addSubview:wentNumView];
+        
         
         
         //map

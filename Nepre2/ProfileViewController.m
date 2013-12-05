@@ -179,7 +179,7 @@
             [wentNumView setAlpha:0.75];
             [wentNumView setBackgroundColor:[UIColor redColor]];
             UILabel *wentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
-            wentNumLabel.text = @"+8";
+            wentNumLabel.text = @"+";
             wentNumLabel.textColor= [UIColor whiteColor];
             wentNumLabel.textAlignment = UITextAlignmentCenter;
             [wentNumLabel setBackgroundColor:[UIColor clearColor]];

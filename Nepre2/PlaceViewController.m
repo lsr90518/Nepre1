@@ -124,7 +124,7 @@
             [wentNumView setAlpha:0.75];
             [wentNumView setBackgroundColor:[UIColor redColor]];
             UILabel *wentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
-            wentNumLabel.text = @"+8";
+            wentNumLabel.text = @"+";
             wentNumLabel.textColor= [UIColor whiteColor];
             wentNumLabel.textAlignment = UITextAlignmentCenter;
             [wentNumLabel setBackgroundColor:[UIColor clearColor]];
@@ -237,6 +237,11 @@
 
 - (IBAction)pushButton:(id)sender {
     UIButton *button = (UIButton *)sender;
+    [Mydata sharedSingleton].detailImageTag = [NSString stringWithFormat:@"%d",button.tag];
+    NSString *temp = [[Mydata sharedSingleton].imageViewnameArray objectAtIndex:button.tag];
+    
+    [[Mydata sharedSingleton].imageViewnameArray replaceObjectAtIndex:button.tag withObject:[[Mydata sharedSingleton].imageViewnameArray objectAtIndex:0]];
+    [[Mydata sharedSingleton].imageViewnameArray replaceObjectAtIndex:0 withObject:temp];
     [Mydata sharedSingleton].detailImageTag = [NSString stringWithFormat:@"%d",button.tag];
     
     SpotDetailViewController *foodDetailViewController = [[SpotDetailViewController alloc]init];
@@ -440,10 +445,9 @@
 
 -(void) initDataArray{
     
-    NSLog(@"%d",[[Mydata sharedSingleton].foodViewArray count]);
     
     //第一步，创建URL
-    NSURL *url = [NSURL URLWithString:@"http://ll.is.tokushima-u.ac.jp/Nepre/GetPhoto"];
+    NSURL *url = [NSURL URLWithString:@"http://ll.is.tokushima-u.ac.jp/Nepre/GetPlacePhoto"];
     
     //第二步，通过URL创建网络请求
     NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
@@ -528,7 +532,7 @@
             [wentNumView setAlpha:0.75];
             [wentNumView setBackgroundColor:[UIColor redColor]];
             UILabel *wentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
-            wentNumLabel.text = @"+8";
+            wentNumLabel.text = @"+";
             wentNumLabel.textColor= [UIColor whiteColor];
             wentNumLabel.textAlignment = UITextAlignmentCenter;
             [wentNumLabel setBackgroundColor:[UIColor clearColor]];

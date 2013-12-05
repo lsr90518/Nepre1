@@ -142,6 +142,7 @@
         NSArray *imageViewheightArray = [jsonImage valueForKey:@"height"];
         NSArray *imageViewwidthArray = [jsonImage valueForKey:@"width"];
         NSArray *imageViewidArray = [jsonImage valueForKey:@"id"];
+        NSArray *imageViewNumArray = [jsonImage valueForKey:@"number"];
         
         //make a image wrap view
         UIView *homeView = [[UIView alloc]initWithFrame:CGRectMake(2, imageViewY, 320, [imageViewheightArray[0] floatValue])];
@@ -160,6 +161,7 @@
             [[Mydata sharedSingleton].imageViewheightArray addObject:imageViewheightArray[j]];
             [[Mydata sharedSingleton].imageViewwidthArray addObject:imageViewwidthArray[j]];
             [[Mydata sharedSingleton].imageViewidArray addObject:imageViewidArray[j]];
+            [[Mydata sharedSingleton].imageViewNumArray addObject:imageViewNumArray[j]];
             //
             NSString *homeImageFileName = [NSString stringWithFormat:@"%@",imageViewnameArray[j]];
             UIButton *homeImageView = [[UIButton alloc]initWithFrame:CGRectMake(imageButtonX, 0, [imageViewwidthArray[j] floatValue], [imageViewheightArray[j] floatValue])];
@@ -198,7 +200,7 @@
             [wentNumView setAlpha:0.75];
             [wentNumView setBackgroundColor:[UIColor redColor]];
             UILabel *wentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
-            wentNumLabel.text = @"+8";
+            wentNumLabel.text = @"+";
             wentNumLabel.textColor= [UIColor whiteColor];
             wentNumLabel.textAlignment = UITextAlignmentCenter;
             [wentNumLabel setBackgroundColor:[UIColor clearColor]];
@@ -236,8 +238,11 @@
 
 - (IBAction)pushButton:(id)sender {
     UIButton *button = (UIButton *)sender;
+    //换位置
+    NSString *temp = [[Mydata sharedSingleton].imageViewnameArray objectAtIndex:button.tag];
+    [[Mydata sharedSingleton].imageViewnameArray replaceObjectAtIndex:button.tag withObject:[[Mydata sharedSingleton].imageViewnameArray objectAtIndex:0]];
+    [[Mydata sharedSingleton].imageViewnameArray replaceObjectAtIndex:0 withObject:temp];
     [Mydata sharedSingleton].detailImageTag = [NSString stringWithFormat:@"%d",button.tag];
-    self.view = nil;
     FoodDetailViewController *foodDetailViewController = [[FoodDetailViewController alloc]init];
     [self.navigationController pushViewController:foodDetailViewController animated:YES];
     
@@ -256,6 +261,15 @@
 }
 
 -(void) goSpot{
+    
+    [[Mydata sharedSingleton].imageViewnameArray removeAllObjects];
+    [[Mydata sharedSingleton].imageViewheightArray removeAllObjects];
+    [[Mydata sharedSingleton].imageViewwidthArray removeAllObjects];
+    [[Mydata sharedSingleton].imageViewidArray removeAllObjects];
+    [[Mydata sharedSingleton].imageViewlatArray removeAllObjects];
+    [[Mydata sharedSingleton].imageViewlngArray removeAllObjects];
+    [[Mydata sharedSingleton].imageViewNumArray removeAllObjects];
+    
     PlaceViewController *p = [[PlaceViewController alloc]init];
     [self.navigationController pushViewController:p animated:YES];
 }
@@ -287,9 +301,12 @@
 {
     //得到图片
     UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    UIImage *newImage = [self scaleImage:image toScale:0.05];
+    UIImage *newImage = [self scaleImage:image toScale:0.1];
     UIImageWriteToSavedPhotosAlbum(newImage, nil, nil, nil);
     [self dismissModalViewControllerAnimated:YES];
+    
+    
+    
     image = nil;
     newImage = nil;
 }
@@ -480,6 +497,12 @@
     }
   
     [[Mydata sharedSingleton].foodViewArray removeAllObjects];
+    //add info to Mydata
+    [[Mydata sharedSingleton].imageViewnameArray removeAllObjects];
+    [[Mydata sharedSingleton].imageViewheightArray removeAllObjects];
+    [[Mydata sharedSingleton].imageViewwidthArray removeAllObjects];
+    [[Mydata sharedSingleton].imageViewidArray removeAllObjects];
+    [[Mydata sharedSingleton].imageViewNumArray removeAllObjects];
     [self initDataArray];
     
     [position1 removeAllObjects];
@@ -495,6 +518,7 @@
         NSArray *imageViewheightArray = [jsonImage valueForKey:@"height"];
         NSArray *imageViewwidthArray = [jsonImage valueForKey:@"width"];
         NSArray *imageViewidArray = [jsonImage valueForKey:@"id"];
+        NSArray *imageViewNumArray = [jsonImage valueForKey:@"number"];
         
         //make a image wrap view
         UIView *homeView = [[UIView alloc]initWithFrame:CGRectMake(2, imageViewY, 320, [imageViewheightArray[0] floatValue])];
@@ -507,6 +531,14 @@
         //paste imageView
         int imageButtonX = 0;
         for(int j = 0 ; j<imageViewnameArray.count ; j++){
+            
+            //add info to Mydata
+            [[Mydata sharedSingleton].imageViewnameArray addObject:imageViewnameArray[j]];
+            [[Mydata sharedSingleton].imageViewheightArray addObject:imageViewheightArray[j]];
+            [[Mydata sharedSingleton].imageViewwidthArray addObject:imageViewwidthArray[j]];
+            [[Mydata sharedSingleton].imageViewidArray addObject:imageViewidArray[j]];
+            [[Mydata sharedSingleton].imageViewNumArray addObject:imageViewNumArray[j]];
+            
             NSString *homeImageFileName = [NSString stringWithFormat:@"%@",imageViewnameArray[j]];
             UIButton *homeImageView = [[UIButton alloc]initWithFrame:CGRectMake(imageButtonX, 0, [imageViewwidthArray[j] floatValue], [imageViewheightArray[j] floatValue])];
             [homeImageView setImage:[UIImage imageNamed:homeImageFileName] forState:UIControlStateNormal];
@@ -542,7 +574,7 @@
             [wentNumView setAlpha:0.75];
             [wentNumView setBackgroundColor:[UIColor redColor]];
             UILabel *wentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
-            wentNumLabel.text = @"+8";
+            wentNumLabel.text = @"+";
             wentNumLabel.textColor= [UIColor whiteColor];
             wentNumLabel.textAlignment = UITextAlignmentCenter;
             [wentNumLabel setBackgroundColor:[UIColor clearColor]];

@@ -47,7 +47,7 @@
     [Mydata sharedSingleton].imageViewidArray = [[NSMutableArray alloc]init];
     [Mydata sharedSingleton].imageViewlatArray = [[NSMutableArray alloc]init];
     [Mydata sharedSingleton].imageViewlngArray = [[NSMutableArray alloc]init];
-    
+    [Mydata sharedSingleton].imageViewNumArray = [[NSMutableArray alloc]init];
     [Mydata sharedSingleton].followerList = [[NSMutableArray alloc] init];
     [Mydata sharedSingleton].followList = [[NSMutableArray alloc] init];
 
